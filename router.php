@@ -7,8 +7,8 @@ define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] 
 //**
 //    TABLA DE RUTEO
 //    Action        Funcion
-//    home          showNoticias()
-//    noticia/:id   showNoticia($id) 
+//    home          showNJuguetes()
+//    noticia/:id   showJuguete($id) 
 //    about         showAbout()
 //    about/:dev    showAbout($dev)
 
