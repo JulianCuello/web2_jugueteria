@@ -1,0 +1,19 @@
+.juguetes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 25px;
+}
+
+.card-img-top {
+    max-height: 200px;
+    object-fit: cover;
+}
+
+.juguete-image {
+    max-height: 500px;
+    width: 100%;
+    object-fit: cover;
+}
+.bg-beige {
+    background-color: #f5f5dc; /* Beige claro */
+}
