@@ -19,7 +19,7 @@ if (!empty($_GET["action"])){
 } else {
     $action = "home";
 }
-// noticia/3 = ["noticia","3"];
+
 $params = explode("/",$action);
 
 switch ($params[0]) {
