@@ -1,5 +1,6 @@
 <?php
 require_once "db_juguetes.php";
+require_once "db_juguetes.php";
 
 function showJuguetes(){
     require_once "templates/header.php";
@@ -10,8 +11,13 @@ function showJuguetes(){
         <div class="row">
           
             <?php 
-            $juguetes = getJuguetes();
-            foreach($juguetes as $index => $juguete) : 
+            $juguetes = seleccionarJuguetes();
+            foreach($juguetes as $juguete){
+              echo $juguete->nombreProducto;
+              echo $juguete->precio;
+              echo $juguete->id_marca;
+
+            } 
             ?>
 
             <div class="col-md-4 mb-4">
@@ -24,7 +30,7 @@ function showJuguetes(){
                 </div>
               </div>
             </div>
-            <?php endforeach; ?>
+            
         </div>
       </section>
     </main>

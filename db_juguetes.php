@@ -1,37 +1,24 @@
 <?php
+
+$db = new PDO ('mysql:host=localhost;dbname=db_jugueteria;charset=utf8', 'root', '');
+
+$sentencia = $db->prepare( "select * from juguete");
+$sentencia->execute();
+
+$juguetes = $sentencia->fetchAll(PDO::FETCH_OBJ);
+foreach($juguetes as $juguete) {
+echo $juguete->nombreProducto;
+echo $juguete->precio;
+echo $juguete->id_marca;
+echo "<br>";
+}
+
+
 /**
  * Archivo php para simular una colección de noticias como si salieran de una base de datos.
  * 
  * Este archivo se comparte con las otras pàginas para que puedan acceder al arreglo indexado $juguetes.
  */
-function getJuguetes(){
-    
-    $n1 = new stdClass();
-    $n1->nombre = "autos chiquitos";
-    $n1->edad = " 1 a 4 años";
-    $n1->imagen = "./img/autos.jpg";
-
-    $n2 = new stdClass();
-    $n2->nombre = "cocina";
-    $n2->edad = " 2 a 6 años";
-    $n2->imagen = "./img/cocina.jpg";
-
-    $n3 = new stdClass();
-    $n3->nombre = "dinosaurios";
-    $n3->edad = " 4 a 9 años";
-    $n3->imagen = "./img/dinosaurios.jpg";
-
-    $n4 = new stdClass();
-    $n4->nombre = "mario";
-    $n4->edad = " 4 a 14 años";
-    $n4->imagen = "./img/mario.jpg";
-
-   
-
-    // declaro el arreglo de juguetes
-    $juguetes = [$n1, $n2, $n3, $n4]; 
-    return $juguetes;
-}
 
 function getjugueteById($id){
     $juguetes = getJuguetes();
