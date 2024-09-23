@@ -12,20 +12,23 @@ function showJuguetes(){
           
             <?php 
             $juguetes = seleccionarJuguetes();
-            foreach($juguetes as $juguete){
+            foreach($juguetes as $index => $juguete) { 
+              // Código a ejecutar con cada $juguete
+          
+        
               echo $juguete->nombreProducto;
               echo $juguete->precio;
               echo $juguete->id_marca;
-
+             
             } 
             ?>
 
             <div class="col-md-4 mb-4">
               <div class="card">
-                <img src="<?php echo $juguete->imagen ?>" class="card-img-top" alt="<?php echo htmlspecialchars($juguete->nombre); ?>">
+                <img src="<?php echo $juguete->imagen ?>" class="card-img-top" alt="<?php echo htmlspecialchars($juguete->nombreProducto); ?>">
                 <div class="card-body">
-                  <h5 class="card-title"><?php echo htmlspecialchars($juguete->nombre); ?></h5>
-                  <p class="card-text"><?php echo htmlspecialchars($juguete->edad); ?></p>
+                  <h5 class="card-title"><?php echo htmlspecialchars($juguete->nombreProducto); ?></h5>
+                  <p class="card-text"><?php echo htmlspecialchars($juguete->precio); ?></p>
                   <a href="juguete/<?php echo $index ?>" class="btn btn-outline-primary">Leer más</a>
                 </div>
               </div>
@@ -53,8 +56,8 @@ function showJugueteById($id){
   <main class="container my-4">
     <section class="juguete">
     <div class="card" style="width: 18rem;">
-      <h1><?php echo htmlspecialchars($juguete->nombre); ?></h1>
-      <p class="lead mt-3"><?php echo htmlspecialchars($juguete->edad); ?></p>
+      <h1><?php echo htmlspecialchars($juguete->nombreProducto); ?></h1>
+      <p class="lead mt-3"><?php echo htmlspecialchars($juguete->precio); ?></p>
       <a href="#" class="btn btn-primary">Comprar</a>
       <img class="juguete-image img-fluid" src="<?php echo htmlspecialchars($juguete->imagen); ?>" alt="Imagen del juguete">
     </section>
