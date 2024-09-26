@@ -1,10 +1,5 @@
 <?php
-require_once "juguetes.php";
-require_once "about.php";
-require_once "tareas.php";
-
-
-
+require_once "app/controladores/juguete.controlador.php";
 
 define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
 
@@ -27,24 +22,29 @@ $params = explode("/",$action);
 
 switch ($params[0]) {
     case "home":
-        showJuguetes();
+        $controlador = new jugueteControlador();
+        $controlador->mostrarJuguetes();
         break;
     case "juguete":
+        $controlador = new jugueteControlador();
         if(isset($params[1])){
-            showJugueteById($params[1]);
+            $controlador->mostrarJuguete($params[1]);
         }else{
-            showJuguetes();
+            $controlador->mostrarJuguetes();
         }
         break;
-        case 'about':
-            if (isset($params[1]))
-                showAbout($params[1]);
-            else 
-                showAbout();
-            break;
-        default: 
-            show404();
-            break;
+    case 'modificar':
+        $controlador = new jugueteControlador();
+        $controlador->guardarJuguete();
+        break;
+    case 'borrar':
+        $controlador = new jugueteControlador();
+        $controlador->borrarJuguete();
+        break;
+    default: 
+        // show404();
+        echo "404 Pagina no encontrada";
+        break;
     }
     
 
