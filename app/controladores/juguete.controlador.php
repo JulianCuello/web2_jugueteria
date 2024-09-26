@@ -1,4 +1,6 @@
 <?php
+    require_once './app/modelo/juguete.modelo.php';
+    require_once './app/vista/juguete.vista.php';
 
     class jugueteControlador {
         private $modelo;
@@ -10,10 +12,15 @@
         }
 
         public function mostrarJuguetes() {
-            $juguetes = $this->modelo->obtenerJuguetes();
+            $juguetes = $this->modelo->seleccionarJuguetes();
 
             return $this->vista->mostrarJuguetes();
-            } 
+        } 
+        public function mostrarJuguete($id) {
+            $juguetes = $this->modelo->seleccionarJuguete();
+
+            return $this->vista->mostrarJuguete($id);
+        }
 
         public function agregarJuguetes () {
             if (!isset($_POST['nombre']) || empty($_POST['nombre'])) {  
@@ -23,32 +30,34 @@
                 return $this->vista->mostrarError('falta completar el precio');
 
             }
-            $nombre = $_POST['nombre'];
+            $nombreProducto = $_POST['nombreProducto'];
             $precio = $_POST['precio'];
             $material = $_POST['material'];
             $codigo = $_POST['codigo'];
 
-            $id = $this->modelo->insertarJuguete($nombre, $precio, $material, $codigo);
+            $id = $this->modelo->insertarJuguete($nombreProducto, $precio, $material, $codigo);
 
             header('Location: ' . BASE_URL);
         }
         public function borrarJuguete ($id){
-            $juguete = $this->modelo->obtenerJuguete($id);
+            $juguete = $this->modelo->seleccionarJuguete($id);
 
             if (!$juguete){
                 return $this->vista->mostrarError('no existe el juguete seleccionado');
             }
-            $this->model->elimiarJuguete($id);
+            $this->modelo->elimiarJuguete($id);
 
             header('Location: ' . BASE_URL);
         } 
         public function guardarJuguete($id) { 
-            $juguete = $this->modelo->obtenerJuguete($id);
+            $juguete = $this->modelo->seleccionarJuguete($id);
 
             if (!$juguete){
                 return $this->vista->mostrarError('no se puede guardar el juguete');
-                header('Location: ' . BASE_URL);
+                
             }
+            $this->modelo->actualizarJuguete($id);
+            header('Location: ' . BASE_URL);
         }    
     }
 
