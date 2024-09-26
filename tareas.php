@@ -1,12 +1,12 @@
 <?php
 
-function getConnection() {
+function crearConexion() {
    return new PDO('mysql:host=localhost;dbname=db_jugueteria;charset=utf8', 'root', '');
 }
 
 function seleccionarJuguetes() {
     // 1. Abro la conexión
-    $db = getConnection();
+    $db = crearConexion();
  
     // 2. Ejecuto la consulta
     $query = $db->prepare('SELECT * FROM juguete');
@@ -18,7 +18,7 @@ function seleccionarJuguetes() {
     return $juguetes;
   }
   function seleccionarJuguete($id) {
-    $db = getConnection();
+    $db = crearConexion();
  
     $query = $db->prepare('SELECT * FROM juguete WHERE id = ?');
     $query->execute([$id]);   
@@ -28,7 +28,7 @@ function seleccionarJuguetes() {
     return $juguete;
   }
     function insertarJuguete($nombreProducto, $precio, $material, $id_marca, $codigo) {
-        $db= getConnection();
+        $db= crearConexion()();
         
         $query =$db -> prepare ('INSERT INTO juguete (nombre, precio, material, id_marca, codigo) VALUES (?, ?, ?, ?, ? )');
         $query ->execute ([$nombreProducto, $precio, $material, $id_marca, $codigo]);
