@@ -30,12 +30,15 @@
                 return $this->vista->mostrarError('falta completar el precio');
 
             }
+            $id_juguete = $_POST['id_juguete'];
             $nombreProducto = $_POST['nombreProducto'];
             $precio = $_POST['precio'];
             $material = $_POST['material'];
+            $id_marca = $_POST['id_marca'];
             $codigo = $_POST['codigo'];
 
-            $id = $this->modelo->insertarJuguete($nombreProducto, $precio, $material, $codigo);
+
+            $id = $this->modelo->insertarJuguete($id_juguete, $nombreProducto, $precio, $material, $codigo, $id_marca);
 
             header('Location: ' . BASE_URL);
         }

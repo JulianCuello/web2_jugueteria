@@ -26,8 +26,8 @@
             return $juguete;
         }
         public function insertarJuguete ($nombreProducto,$precio, $material, $codigo){
-            $query =$this->db-> prepare ('INSERT INTO juguete (nombreProducto, precio, material, id_marca, codigo) VALUES (?, ?, ?, ?, ? )');
-            $query ->execute ([$nombreProducto, $precio, $material, $id_marca, $codigo]);
+            $query =$this->db-> prepare ('INSERT INTO juguete (id_juguete,nombreProducto, precio, material, id_marca, codigo) VALUES (?, ?, ?, ?, ? )');
+            $query ->execute ([$id_juguete, $nombreProducto, $precio, $material, $id_marca,$codigo]);
     
             $id = $this->db->lastInsertId();
     
