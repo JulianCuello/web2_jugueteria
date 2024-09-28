@@ -14,7 +14,7 @@
         public function mostrarJuguetes() {
             $juguetes = $this->modelo->seleccionarJuguetes();
 
-            return $this->vista->mostrarJuguetes();
+            return $this->vista->mostrarJuguetes($juguetes);
         } 
         public function mostrarJuguete($id) {
             $juguetes = $this->modelo->seleccionarJuguete();
@@ -22,7 +22,7 @@
             return $this->vista->mostrarJuguete($id);
         }
 
-        public function agregarJuguetes () {
+        public function agregarJuguetes() {
             if (!isset($_POST['nombre']) || empty($_POST['nombre'])) {  
                 return $this->vista->mostrarError('el nomnbre es un requisito');
             }
@@ -37,15 +37,15 @@
             $id_marca = $_POST['id_marca'];
             $codigo = $_POST['codigo'];
 
-
-            $id = $this->modelo->insertarJuguete($id_juguete, $nombreProducto, $precio, $material, $codigo, $id_marca);
+            $id = $this->modelo->insertarJuguete($id_juguete, $nombreProducto, $precio, $material, $id_marca, $codigo);
 
             header('Location: ' . BASE_URL);
         }
-        public function borrarJuguete ($id){
+
+        public function borrarJuguete($id) {
             $juguete = $this->modelo->seleccionarJuguete($id);
 
-            if (!$juguete){
+            if (!$juguete) {
                 return $this->vista->mostrarError('no existe el juguete seleccionado');
             }
             $this->modelo->elimiarJuguete($id);

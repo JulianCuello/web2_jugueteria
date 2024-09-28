@@ -1,24 +1,21 @@
 <?php
-require_once "db_juguetes.php";
-require_once "db_juguetes.php";
 
+require_once 'app/controlador/juguete.controlador.php';
 
-class jugueteVista() {
-  public function mostrarJuguetes($juguetes) {
+class jugueteVista {
+  /*public function mostrarJuguetes($juguetes) {
       // la vista define una nueva variable con la cantida de tareas
       $count = count($juguetes);
 
       // NOTA: el template va a poder acceder a todas las variables y constantes que tienen alcance en esta funcion
       require 'templates/lista_tareas.phtml';
   }
+      */
 
   public function mostrarError($error) {
       require 'templates/error.phtml';
   }
-
-}
-
-function mostrarJuguetes(){
+  function mostrarJuguetes(){
     require_once "templates/header.php";
     ?>
     <!-- main section -->
@@ -27,6 +24,7 @@ function mostrarJuguetes(){
         <div class="row">
           
             <?php 
+
             $juguetes = seleccionarJuguetes();
             foreach($juguetes as $index => $juguete) { 
               // Código a ejecutar con cada $juguete
@@ -82,5 +80,8 @@ function mostrarJuguete($id){
   <?php
   require_once "templates/footer.php";
 }
+}
+
+
 
 ?>
