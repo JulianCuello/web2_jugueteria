@@ -1,11 +1,14 @@
 <?php
 
+    
+
     class jugueteModelo {
         private $db;
 
         public function __construct() {
         $this->db = new PDO('mysql:host=localhost;dbname=db_jugueteria;charset=utf8', 'root', '');
         }
+
         public function seleccionarJuguetes(){
         
             $query = $this->db->prepare('SELECT * FROM juguete');
@@ -16,6 +19,7 @@
         
             return $juguetes;
         }
+
         public function seleccionarJuguete($id) {
         
             $query = $this->db->prepare('SELECT * FROM juguete WHERE id = ?');

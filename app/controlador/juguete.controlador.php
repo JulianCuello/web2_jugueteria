@@ -12,10 +12,18 @@
         }
 
         public function mostrarJuguetes() {
+           /* if (!isset($_POST['nombre']) || empty($_POST['nombre'])) {  
+                return $this->vista->mostrarError('el nomnbre es un requisito');
+            }
+            if (!isset($_POST['precio']) || empty($_POST['precio'])) {
+                return $this->vista->mostrarError('falta completar el precio');
+            }*/
+
             $juguetes = $this->modelo->seleccionarJuguetes();
 
             return $this->vista->mostrarJuguetes($juguetes);
         } 
+        
         public function mostrarJuguete($id) {
             $juguetes = $this->modelo->seleccionarJuguete();
 
@@ -23,21 +31,17 @@
         }
 
         public function agregarJuguetes() {
-            if (!isset($_POST['nombre']) || empty($_POST['nombre'])) {  
-                return $this->vista->mostrarError('el nomnbre es un requisito');
-            }
-            if (!isset($_POST['precio']) || empty($_POST['precio'])) {
-                return $this->vista->mostrarError('falta completar el precio');
-
-            }
+            
             $id_juguete = $_POST['id_juguete'];
             $nombreProducto = $_POST['nombreProducto'];
             $precio = $_POST['precio'];
             $material = $_POST['material'];
             $id_marca = $_POST['id_marca'];
             $codigo = $_POST['codigo'];
+            $img = $_POST['img'];
 
-            $id = $this->modelo->insertarJuguete($id_juguete, $nombreProducto, $precio, $material, $id_marca, $codigo);
+
+            $id = $this->modelo->insertarJuguete($id_juguete, $nombreProducto, $precio, $material, $id_marca, $codigo, $img);
 
             header('Location: ' . BASE_URL);
         }
