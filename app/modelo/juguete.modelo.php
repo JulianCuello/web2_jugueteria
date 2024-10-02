@@ -1,7 +1,5 @@
 <?php
 
-    
-
     class jugueteModelo {
         private $db;
 
@@ -9,41 +7,43 @@
         $this->db = new PDO('mysql:host=localhost;dbname=db_jugueteria;charset=utf8', 'root', '');
         }
 
-        public function seleccionarJuguetes(){
+        public function mostrarJuguetes(){
         
-            $query = $this->db->prepare('SELECT * FROM juguete');
+            $query = $this->db->prepare('SELECT juguete.*, marca.origen FROM juguete JOIN marca ON juguete.id_Marca = marca.id_marca;');
             $query->execute();
-        
-            // 3. Obtengo los datos en un arreglo de objetos
-            $juguetes = $query->fetchAll(PDO::FETCH_OBJ); 
-        
-            return $juguetes;
+            return $query->fetchAll(PDO::FETCH_OBJ);
+        }
+        public function seleccionarJuguete($id) {
+                $query = $this->db->prepare('SELECT * FROM `juguete` JOIN marca ON juguete.id_marca=marca.id_marca WHERE id_marca = ?');
+                $query->execute([$id]);
+                return $query->fetchAll(PDO::FETCH_OBJ);
+            }
+        }
+        public function obtenerJuguetesMarcaPorId($id){
+            $query = $this->db->prepare('SELECT juguete.*, marca.marca FROM juguetes JOIN marca ON juguetes.id_marca = marca.id_marca WHERE juguete.id_marca=?');
+            $query->execute([$id]);
+            return $query->fetchAll(PDO::FETCH_OBJ);
+           
+            return $query;
         }
 
-        public function seleccionarJuguete($id) {
-        
-            $query = $this->db->prepare('SELECT * FROM juguete WHERE id = ?');
-            $query->execute([$id]);   
-        
-            $juguete = $query->fetch(PDO::FETCH_OBJ);
-        
-            return $juguete;
-        }
-        public function insertarJuguete ($nombreProducto,$precio, $material, $codigo){
+
+        public function insertarJuguete ($id_juguete,$nombreProducto,$precio, $material, $codigo, $img){
             $query =$this->db-> prepare ('INSERT INTO juguete (id_juguete,nombreProducto, precio, material, id_marca, codigo) VALUES (?, ?, ?, ?, ? )');
-            $query ->execute ([$id_juguete, $nombreProducto, $precio, $material, $id_marca,$codigo]);
+            $query ->execute ([$id_juguete, $nombreProducto, $precio, $material, $id_marca,$codigo, $img]);
     
-            $id = $this->db->lastInsertId();
-    
-            return $id;
-    
+            return $this->db->lastInsertId();
         }
+       
         public function eliminarJuguete($id){
             $query = $this->db->prepare ('DELETE FROM juguete WHERE id = ?');
             $query->execute([$id]);
+            return $query->rowCount();
         }
-        function actualizarJuguete ($id){
-            $query = $db->prepare('UPDATE juguete SET precio = 1 WHERE id = ?');
-            $query->execute([$id]);
+        
+        public function actualizarJuguete($id_juguete,$nombreProducto,$precio, $material, $codigo, $img){
+            $query = $this->db->prepare('UPDATE juguete SET nombreProducto=?,precio=?,material=?,codigo=?,img=? WHERE id_marca=?');
+            $query->execute([$id_juguete,, $nombreProducto, $precio, $material, $codigo, $img]);
+            return $query->rowCount();
         }
-}
+       
