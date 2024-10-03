@@ -3,12 +3,12 @@ require_once './app/views/auth.view.php';
 require_once './app/models/user.model.php';
 require_once './helpers/auth.helper.php';
 
-class AutorozacionController{
+class AutorizacionController{
     private $vista;
     private $modelo;
 
     public function __construct(){
-        $this->modelo = new UsuarioModel();
+        $this->modelo = new UsuarioModelo();
         $this->vista = new AutorizacionVista();
     }
 

@@ -15,36 +15,85 @@ define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] 
 if (!empty($_GET["action"])){
     $action = $_GET["action"];
 } else {
-    $action = "home";
+    $action = "lista";
 }
 
 $params = explode("/",$action);
 
+//instancio una sola vez
+$listaController = new ListaContrololador();
+$marcaControlador = new marcaControlador();
+$AutorizacionControlador = new AutorizacionControlador();
+$mostrarControlador = new mostrarControlador();
+
 switch ($params[0]) {
-    case "home":
-        $controlador = new jugueteControlador();
-        $controlador->mostrarJuguetes();
+
+    case 'list':
+        $listController->showList();
         break;
-    case "juguete":
-        $controlador = new jugueteControlador();
-        if(isset($params[1])){
-            $controlador->mostrarJuguete($params[1]);
-        }else{
-            $controlador->mostrarJuguetes();
-        }
+    case 'listId':
+        if(isset($params[1]))
+        $listController->showListById($params[1]);
+        else $listController->showList();
         break;
-    case 'modificar':
-        $controlador = new jugueteControlador();
-        $controlador->guardarJuguete();
+    case 'removeItem':
+        if(isset($params[1]))
+        $listController->removeItem($params[1]);
+        else $showController->showError("404-Not-Found");
         break;
-    case 'borrar':
-        $controlador = new jugueteControlador();
-        $controlador->borrarJuguete();
+    case 'updateItemForm':
+        if(isset($params[1]))
+        $listController->showFormUpdate($params[1]);
+        else $showController->showError("404-Not-Found");
         break;
-    default: 
-        // show404();
-        echo "404 Pagina no encontrada";
+    case 'updateItem':
+        $listController->showUpdate();
         break;
-    }
+    case 'addItemForm':
+        $listController->showFormAlta();
+        break;
+    case 'addItem':
+        $listController->addItem();
+        break;
+    case 'category':
+        $categoryController->showCategory();
+        break;
+    case 'categoryId':
+        if(isset($params[1]))
+        $categoryController->showCategoryById($params[1]);
+        else $categoryController->showCategory();
+        break;
+    case 'removeCategory':
+        if(isset($params[1]))
+        $categoryController->removeCategory($params[1]);
+        else $showController->showError("404-Not-Found");
+        break;
+    case 'updateCategoryForm':
+        if(isset($params[1]))
+        $categoryController->showFormCategoryUpdate($params[1]);
+        else $showController->showError("404-Not-Found");
+        break;
+    case 'updateCategory':
+        $categoryController->showCategoryUpdate();
+        break;
+    case 'addCategoryForm':
+        $categoryController->showFormCategory();
+        break;
+    case 'addCategory':
+        $categoryController->addCategory();
+        break;
+    case 'login':
+        $authController->showLogin();
+        break;
+    case 'logout':
+        $authController->logout();
+        break;
+    case 'auth':
+        $authController->auth();
+        break;
+    default:
+        $showController->showError("404-Not-Found");
+        break;
+}
     
 
