@@ -1,11 +1,4 @@
 <?php
-/**
- * Esta pagina PHP muestra el home de noticias cargadas dinamicamente.
- * 
- * Utiliza el arreglo $noticias compartido simulando registros que saldrian de una Base de Datos.
- */
-
-
 // fecha actual para el footer
 $fecha = new DateTime();
 
@@ -38,10 +31,10 @@ $fecha = new DateTime();
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="home">Noticias</a>
+                    <a class="nav-link" aria-current="page" href="inicioSesion">inicioSesion</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="about">Nosotros</a>
+                    <a class="nav-link" aria-current="page" href="cierreSesion">cierreSesion</a>
                 </li>
             </ul>
         </div>

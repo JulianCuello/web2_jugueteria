@@ -1,7 +1,7 @@
 
 <?php
 
-require_once 'app/controlador/juguete.controlador.php';
+require_once 'app/controladores/juguete.controlador.php';
 
 class jugueteVista {
 
@@ -14,7 +14,7 @@ class jugueteVista {
     }
     
     public function mostrarJuguetePorId($lista) {
-        require './templates/mostrar/listaPorId.phtml';   
+        require './templates/mostrar/juguetePorId.phtml';   
     }
 
     public function mostrarModificacionDeUsuario($marca, $item) {

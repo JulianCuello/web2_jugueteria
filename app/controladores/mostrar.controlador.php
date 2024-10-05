@@ -1,8 +1,8 @@
 <?php
-require_once './app/views/list.view.php';
+require_once './app/vistas/juguete.vista.php';
 
 //controlador de manejo de errores que utiliza el router, por default y parametros no definidos $params[1]
-class vistaControlador{
+class mostrarControlador{
 
     private $vista;
 
@@ -11,6 +11,6 @@ class vistaControlador{
     }
 
     public function demostrarError($error){
-        $this->view->mostrarError($error);
+        $this->vista->mostrarError($error);
     }
 }

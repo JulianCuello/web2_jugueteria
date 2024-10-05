@@ -1,16 +1,14 @@
 <?php
-require_once "app/controlador/juguete.controlador.php";
+
+require_once './app/controladores/juguete.controlador.php';
+require_once './app/controladores/marca.controlador.php';
+require_once './app/controladores/autorizacion.controlador.php';
+require_once './app/controladores/mostrar.controlador.php';
 
 define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
 
-
-//**
 //    TABLA DE RUTEO
-//    Action        Funcion
-//    home          showNJuguetes()
-//    noticia/:id   showJuguete($id) 
-//    about         showAbout()
-//    about/:dev    showAbout($dev)
+
 
 if (!empty($_GET["action"])){
     $action = $_GET["action"];
@@ -21,78 +19,78 @@ if (!empty($_GET["action"])){
 $params = explode("/",$action);
 
 //instancio una sola vez
-$listaController = new ListaContrololador();
-$marcaControlador = new marcaControlador();
-$AutorizacionControlador = new AutorizacionControlador();
-$mostrarControlador = new mostrarControlador();
+$jugueteControlador = new JugueteControlador();
+$marcaControlador = new MarcaControlador();
+$autorizacionControlador = new AutorizacionControlador();
+$mostrarControlador = new MostrarControlador();
 
 switch ($params[0]) {
 
-    case 'list':
-        $listController->showList();
+    case 'juguete':
+        $listaControlador->mostrarJuguetes();
         break;
-    case 'listId':
+    case 'jugueteId':
         if(isset($params[1]))
-        $listController->showListById($params[1]);
-        else $listController->showList();
+        $jugueteControlador->mostrarJuguetePorId($params[1]);
+        else $listaControlador->mostrarLista();
         break;
-    case 'removeItem':
+    case 'eliminarJuguete':
         if(isset($params[1]))
-        $listController->removeItem($params[1]);
-        else $showController->showError("404-Not-Found");
+        $jugueteControlador->eliminarJuguete($params[1]);
+        else $mostrarControlador->mostrarError("404-Not-Found");
         break;
-    case 'updateItemForm':
+    case 'modificarFormularioJuguete':
         if(isset($params[1]))
-        $listController->showFormUpdate($params[1]);
-        else $showController->showError("404-Not-Found");
+        $jugueteControlador->mostrarFormularioModificacion($params[1]);
+        else $mostrarControlador->mostrarError("404-Not-Found");
         break;
-    case 'updateItem':
-        $listController->showUpdate();
+    case 'modificarJuguete':
+        $jugueteControlador->mostrarModificacion();
         break;
-    case 'addItemForm':
-        $listController->showFormAlta();
+    case 'AgregarJugueteFormulario':
+        $jugueteControlador->mostrarFormularioAlta();
         break;
-    case 'addItem':
-        $listController->addItem();
+    case 'agregarJuguete':
+        $jugueteControlador->agregarJuguete();
         break;
-    case 'category':
-        $categoryController->showCategory();
+    case 'marca':
+        $marcaControlador->mostrarMarca();
         break;
-    case 'categoryId':
+    case 'marcaId':
         if(isset($params[1]))
-        $categoryController->showCategoryById($params[1]);
-        else $categoryController->showCategory();
+        $marcaControlador->mostrarMarcaPorId($params[1]);
+        else $marcaControlador->mostrarMarca();
         break;
-    case 'removeCategory':
+    case 'eliminarMarca':
         if(isset($params[1]))
-        $categoryController->removeCategory($params[1]);
-        else $showController->showError("404-Not-Found");
+        $marcaControlador->eliminarMarca($params[1]);
+        else $mostrarControlador->mostrarError("404-Not-Found");
         break;
-    case 'updateCategoryForm':
+    case 'modificarMarcaFormulario':
         if(isset($params[1]))
-        $categoryController->showFormCategoryUpdate($params[1]);
-        else $showController->showError("404-Not-Found");
+        $marcaControlador->mostrarFormularioMarcaModificacion($params[1]);
+        else $marcaControlador->mostrarError("404-Not-Found");
         break;
-    case 'updateCategory':
-        $categoryController->showCategoryUpdate();
+    case 'modificarMarca':
+        $marcaControlador->mostrarMarcaModificacion();
         break;
-    case 'addCategoryForm':
-        $categoryController->showFormCategory();
+    case 'agregarMarcaFormulario':
+        $marcaControlador->mostrarFormularioMarca();
         break;
-    case 'addCategory':
-        $categoryController->addCategory();
+    case 'agregarMarca':
+        $marcaControlador->agregarMarca();
         break;
-    case 'login':
-        $authController->showLogin();
+    case 'inicioSesion':
+        $autorizacionControlador->mostrarInicioSesion();
         break;
-    case 'logout':
-        $authController->logout();
+    case 'cierreSesion':
+        $autorizacionControlador->cierreSesion();
         break;
-    case 'auth':
-        $authController->auth();
+    case 'autorizacion':
+        $autorizacionControlador->autorizacion();
         break;
     default:
-        $showController->showError("404-Not-Found");
+        $mostrarControlador->mostrarError("404-Not-Found");
         break;
 }
     

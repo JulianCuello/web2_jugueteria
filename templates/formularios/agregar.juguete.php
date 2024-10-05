@@ -35,4 +35,4 @@
     </form>
 </div>
 
-<?php require_once 'templates/task/footer.phtml'; ?>
+<?php require_once 'templates/tareas/footer.phtml'; ?>

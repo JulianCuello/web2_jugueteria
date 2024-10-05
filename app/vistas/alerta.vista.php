@@ -3,7 +3,7 @@
 class AlertaVista{
 
     public function mostrarError($error){
-        require './templates/alerts/error.phtml';
+        require './templates/alertas/error.phtml';
     }
 
     public function mostrarVacio($text){

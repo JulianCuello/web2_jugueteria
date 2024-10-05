@@ -1,9 +1,9 @@
 <?php
-require_once './app/views/auth.view.php';
-require_once './app/models/user.model.php';
-require_once './helpers/auth.helper.php';
+require_once './app/vistas/autorizacion.vista.php';
+require_once './app/modelos/usuario.modelo.php';
+require_once './ayudas/autorizacion.ayuda.php';
 
-class AutorizacionController{
+class AutorizacionControlador{
     private $vista;
     private $modelo;
 
@@ -21,7 +21,7 @@ class AutorizacionController{
         $password = $_POST['password'];
 
         if (empty($email) || empty($contraseña)) {
-            $this->view->showLogin('Datos incompletos');
+            $this->view->mostrarInicioSesion('Datos incompletos');
             return;
         }
         //busco al usuario en la base
@@ -29,7 +29,7 @@ class AutorizacionController{
 
         if ($usuario && password_verify($password, $usuario->password)) {
             //si es valida la utenticacion se loguea y redirije.
-            AuthHelper::login($usuario);
+            AuthHelper::inicioSesion($usuario);
             header('Location: ' . BASE_URL . "lista");
             exit();
         } else {
@@ -38,13 +38,11 @@ class AutorizacionController{
         }
     }
 
-    public function logout(){
-        AuthHelper::logout();
+    public function cerrarSesion(){
+        AuthHelper::cerrarSesion();
         header('Location: ' . BASE_URL);
     }
 
 }
-
-
 // $clave='admin';
 // $hash= password_hash($clave,PASSWORD_BCRYPT);

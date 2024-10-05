@@ -1,7 +1,7 @@
 <?php
-require_once './app/modelo/usuario.modelo.php';
+require_once './app/modelos/usuario.modelo.php';
 
-class UserModel extends Model{
+class UsuarioModelo /*extends Model*/{
 
     public function obtenerPorEmail($email) {
         $query = $this->db->prepare('SELECT * FROM usuarios WHERE email = ?');

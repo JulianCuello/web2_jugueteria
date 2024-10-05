@@ -2,7 +2,7 @@
 require_once 'templates/header.php';  ?>
 
 <div class="container mt-1" >
-    <h2>Modificacion de Producto</h2>
+    <h2>Modificar juguete</h2>
     <form action="modificarJuguete" method="POST">
         <div class="mb-1">
             
@@ -41,4 +41,4 @@ require_once 'templates/header.php';  ?>
 
 <?php
 
-require_once 'templates/task/footer.phtml';
+require_once 'templates/tareas/footer.phtml';

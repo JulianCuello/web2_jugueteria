@@ -25,7 +25,7 @@ require 'templates/header.php';
                         <td><img src="<?php echo $item->img; ?>"class="imagen"></td>
                         <td><?php echo $item->juguete; ?></td>
                         <td>
-                            <a href="listId/<?php echo $item->id_juguete; ?>" class="btn btn-primary">Ver Producto</a>
+                            <a href="jugueteId/<?php echo $item->id_juguete; ?>" class="btn btn-primary">Ver Producto</a>
                             <a href="eliminarJuguete/<?php echo $item->id_juguete; ?>" type="button" class='btn btn-danger ml-auto'>Eliminar</a>
                             <a href="actualizarJuguete/<?php echo $item->id_juguete; ?>" type="button" class='btn btn-success ml-auto'>Modificar</a>
                         </td>

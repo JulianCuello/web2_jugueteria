@@ -1,14 +1,14 @@
 <?php
-require_once './app/views/category.view.php';
-require_once './app/views/alert.view.php';
-require_once './app/models/category.model.php';
-require_once './helpers/validation.helper.php';
+require_once './app/vistas/marca.vista.php';
+require_once './app/vistas/alerta.vista.php';
+require_once './app/modelos/marca.modelo.php';
+require_once './ayudas/validacion.ayuda.php';
 
 //controller de categorias
 class marcaControlador
 {
     private $modelo;
-    private $modelLista;
+    private $modelJuguete;
     private $vista;
     private $alertaVista;
 
@@ -16,7 +16,7 @@ class marcaControlador
     {
         //se instancian los dos modelos para no delegar mal, y que cada modelo acceda a su tabla correspondiente.
         $this->modelo = new marcaModelo();
-        $this->modeloLista = new ListaModelo();
+        $this->modeloJuguete = new JugueteModelo();
         $this->vista = new marcaVista();
         $this->alertaViesta = new AlertaVista();
     }
@@ -26,7 +26,7 @@ class marcaControlador
     {
         $marcas = $this->modelo->obtenerMarca();
         if ($marcas != null) {
-            $this->vista->mostrarMarca($marcas, AuthHelper::isAdmin());
+            $this->vista->mostrarMarca($marcas, autorizacionAyuda::esAdministrador());
         } else {
             $this->alertaVista->mostrarVacio("no hay elementos para mostrar");
         }
@@ -34,8 +34,8 @@ class marcaControlador
     //lista filtrada
     public function mostrarMarcaPorId($id)
     {
-        if (ValidationHelper::verifyIdRouter($id)) { //validacion datos recibidos del router
-            $marca = $this->modeloLista->getItemsCategoryById($id);//selecciona los items relacionados y la categoria asociada segun parametro
+        if (ValidacionAyuda::verificacionIdRouter($id)) { //validacion datos recibidos del router
+            $marca = $this->modeloLista->obtenerJugueteMarcaId($id);//selecciona los items relacionados y la categoria asociada segun parametro
             if ($marca != null) {
                 $this->vista->mostrarJugueteMarcaPorId($marca);
             } else {
@@ -49,8 +49,8 @@ class marcaControlador
     //eliminar categoria
     public function eliminarMarca($id)
     {
-        AuthHelper::verify(); //verifico permisos y parametros validos
-        if (ValidationHelper::verifyIdRouter($id)) {
+        autorizacionAyuda::verificacion(); //verifico permisos y parametros validos
+        if (ValidationHelper::verificacionIdRouter($id)) {
             try {
                 $marcaEliminada = $this->modelo->borrarMarca($id);
                 if ($marcaEliminada > 0) {
@@ -71,8 +71,8 @@ class marcaControlador
 
     //mostrar formulario modificacion
     public function mostrarModificacionFormMarca($id){
-        AuthHelper::verify(); //verifico permisos y parametros validos
-        if (ValidationHelper::verifyIdRouter($id)) {
+        autorizacionAyuda::verificacion(); //verifico permisos y parametros validos
+        if (ValidacionAyuda::verificacionIdRouter($id)) {
             $marca = $this->modelo->obtenerMarcaId($id);//consulto los datos actuales
             if($marca!=null){
             $this->vista->mostrarModificacionFormMarca($marca);
@@ -87,16 +87,16 @@ class marcaControlador
 
     //enviar datos de modificacion 
     public function mostrarModificacionMarca(){
-        AuthHelper::verify();
+        autorizacionAyuda::verificacion();
         try {//verifico permisos, parametros validos y posible acceso sin previo acceso al form modificacion.
-            if ($_POST && ValidationHelper::verifyForm($_POST)) {
+            if ($_POST && ValidacionAyuda::verificacionFormulario($_POST)) {
                 $id_marca =htmlspecialchars($_POST['id_marca']);
                 $origen =htmlspecialchars($_POST['origen']);
                 $caracteristica =htmlspecialchars($_POST['caracteristica']);
                 
                 $marcaModificada = $this->modelo->modificacionJuguete($id_marca, $origen, $caracteristica);
                 if ($marcaModificada > 0) {
-                    header('Location: ' . BASE_URL . "category");
+                    header('Location: ' . BASE_URL . "marca");
                 } else {
                     $this->alertaVista->mostrarError("No se pudo actualizar marca");
                 }
@@ -111,21 +111,21 @@ class marcaControlador
 
     //mostrar formulario altaCategoria
     public function mostrarFormularioMarca(){
-        AuthHelper::verify();
+        autorizacionAyuda::verificacion();
         $this->vista->mostrarFormularioMarca();
     }
 
     public function agregarMarca(){
-        AuthHelper::verify();
+        autorizacionAyuda::verificacion();
         try {//verifico permisos, parametros validos y posible acceso sin datos al form de alta.
-            if ($_POST && ValidationHelper::verifyForm($_POST)) {
+            if ($_POST && ValidacionAyuda::verificacionFormulario($_POST)) {
 
                 $origen =htmlspecialchars($_POST['origen']);
                 $caracteristica =htmlspecialchars($_POST['caracteristica']);
                
                 $id = $this->modelo->insertarMarca($origen, $caracteristica);
                 if ($id) {
-                    header('Location: ' . BASE_URL . "category");
+                    header('Location: ' . BASE_URL . "marca");
                 } else {
                     $this->alertaVista->mostrarError("Error al insertar la categoria");
                 }

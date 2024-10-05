@@ -1,6 +1,6 @@
 <?php
    
-class CategoryView{
+class marcaVista{
 
     public function mostrarMarca($marca,$adm){
         require './templates/mostrar/lista.marca.phtml';

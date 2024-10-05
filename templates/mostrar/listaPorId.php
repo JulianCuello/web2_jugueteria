@@ -1,4 +1,4 @@
-<?php require './templates/task/header.phtml'; ?>
+<?php require './templates/tareas/header.phtml'; ?>
 
 <div class="container mt-5">
     <?php foreach ($lista as $juguete) { ?>
@@ -12,7 +12,7 @@
                         <h5 class="card-title"><?= $item->nombreProducto; ?></h5>
                         <p class="card-text"><?= $item->codigo; ?></p>
                         <p class="card-text"><strong>Precio:</strong>$<?= $item->precio; ?></p>
-                        <p class="card-text"><strong>Marca:</strong> <?= $item->marca; ?></p>
+                        <p class="card-text"><strong>Material:</strong> <?= $item->material; ?></p>
                         
                         <a href="lista" class="btn btn-primary">Volver</a>
                     </div>
@@ -22,4 +22,4 @@
     <?php } ?>
 </div>
 
-<?php require_once 'templates/task/footer.phtml'; ?>
+<?php require_once 'templates/tareas/footer.phtml'; ?>

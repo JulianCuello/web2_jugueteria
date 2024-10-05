@@ -1,7 +1,7 @@
 </div>
 <footer class="bg-dark text-white text-center fixed-bottom py-2">
     <div class="container">
-        <p>2024 TUDAI UNICEN - Integrantes: Julian Cuello y Victoria Bayerque</p>
+        <p>2024 TUDAI UNICEN - Integrante: Julian Cuello</p>
 
     </div>
 </footer>
