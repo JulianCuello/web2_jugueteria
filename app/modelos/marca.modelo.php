@@ -1,9 +1,8 @@
 <?php
 //require_once './app/modelos/modelo.php';
 
-//class marcaModelo extends Model{
+class marcaModelo {
     
-    //consulta todas las marcas
     
    function obtenerMarca(){
         $query = $this->db->prepare('SELECT * FROM `marca`');
@@ -37,3 +36,4 @@
         $query->execute();
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
+  }

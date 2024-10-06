@@ -5,7 +5,7 @@
     require_once './app/modelos/marca.modelo.php';
     require_once './ayudas/validacion.ayuda.php';
 
-    class JugueteControlador {
+    class jugueteControlador {
         private $modelo;
         private $vista;
         private $alertaVista;
@@ -19,7 +19,7 @@
         }
 
         public function mostrarJuguetes(){
-            $lista = $this->modelo->obtenerJuguete();
+            $lista = $this->modelo->mostrarJuguete();
             if ($lista != null) {
                 $this->vista->mostrarJuguetes($lista, AutorizacionAyuda::esAdministrador());
             } else {
@@ -115,8 +115,8 @@
 }
 
 public function mostrarFormularioAlta(){
-    AuthHelper::verify();
-    $marca = $this->modeloCategoria->obtenerIdMarca(); //consulta las marcas disponibles
+    autorizacionAyuda::verificacion();
+    $marca = $this->modeloMarca->obtenerIdMarca(); //consulta las marcas disponibles
     $this->vista->mostrarFormulario($marca);
 }
 

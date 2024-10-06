@@ -3,7 +3,7 @@ require_once './app/vistas/autorizacion.vista.php';
 require_once './app/modelos/usuario.modelo.php';
 require_once './ayudas/autorizacion.ayuda.php';
 
-class AutorizacionControlador{
+class autorizacionControlador{
     private $vista;
     private $modelo;
 
@@ -13,33 +13,33 @@ class AutorizacionControlador{
     }
 
     public function mostrarInicioSesion(){
-        $this->vista->mostrarInicioSesion();
+        $this->vista->inicioSesion();
     }
 
     public function autorizacion(){ //autenticacion de Usuario
         $email = htmlspecialchars($_POST['email']);
-        $password = $_POST['password'];
+        $contraseña = $_POST['contraseña'];
 
         if (empty($email) || empty($contraseña)) {
-            $this->view->mostrarInicioSesion('Datos incompletos');
+            $this->vista->mostrarInicioSesion('Datos incompletos');
             return;
         }
         //busco al usuario en la base
         $usuario = $this->modelo->obtenerPorEmail($email);
 
-        if ($usuario && password_verify($password, $usuario->password)) {
+        if ($usuario && verificarContraseña($contraseña, $usuario->contraseña)) {
             //si es valida la utenticacion se loguea y redirije.
-            AuthHelper::inicioSesion($usuario);
+            AutorizacionAyuda::inicioSesion($usuario);
             header('Location: ' . BASE_URL . "lista");
             exit();
         } else {
             //no fue autenticado.
-            $this->view->mostrarIniciosesion('Usuario inválido'); 
+            $this->vista->mostrarInicioSesion('Usuario inválido'); 
         }
     }
 
     public function cerrarSesion(){
-        AuthHelper::cerrarSesion();
+        AutorizacionAyuda::cerrarSesion();
         header('Location: ' . BASE_URL);
     }
 

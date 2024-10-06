@@ -21,7 +21,7 @@ class jugueteVista {
         require './templates/formularios/modificarJuguete.phtml';          
     }
     
-    public function showForm($categoria){
+    public function mostrarFormulario($marca){
         require './templates/formularios/agregar.juguete.phtml';
     }
 }

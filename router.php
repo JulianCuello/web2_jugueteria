@@ -27,12 +27,12 @@ $mostrarControlador = new MostrarControlador();
 switch ($params[0]) {
 
     case 'juguete':
-        $listaControlador->mostrarJuguetes();
+        $jugueteControlador->mostrarJuguetes();
         break;
     case 'jugueteId':
         if(isset($params[1]))
         $jugueteControlador->mostrarJuguetePorId($params[1]);
-        else $listaControlador->mostrarLista();
+        else $listaControlador->mostrarJuguete();
         break;
     case 'eliminarJuguete':
         if(isset($params[1]))
@@ -84,13 +84,13 @@ switch ($params[0]) {
         $autorizacionControlador->mostrarInicioSesion();
         break;
     case 'cierreSesion':
-        $autorizacionControlador->cierreSesion();
+        $autorizacionControlador->cerrarSesion();
         break;
     case 'autorizacion':
         $autorizacionControlador->autorizacion();
         break;
     default:
-        $mostrarControlador->mostrarError("404-Not-Found");
+        $mostrarControlador->demostrarError("404-Not-Found");
         break;
 }
     
