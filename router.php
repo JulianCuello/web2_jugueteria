@@ -26,13 +26,13 @@ $mostrarControlador = new MostrarControlador();
 
 switch ($params[0]) {
 
-    case 'juguete':
+    case 'lista':
         $jugueteControlador->mostrarJuguetes();
         break;
     case 'jugueteId':
         if(isset($params[1]))
         $jugueteControlador->mostrarJuguetePorId($params[1]);
-        else $listaControlador->mostrarJuguete();
+        else $listaControlador->mostrarJuguetes();
         break;
     case 'eliminarJuguete':
         if(isset($params[1]))

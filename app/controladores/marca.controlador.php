@@ -46,15 +46,15 @@ class marcaControlador
         }
     }
 
-    //eliminar categoria
+    //eliminar juguete
     public function eliminarMarca($id)
     {
         autorizacionAyuda::verificacion(); //verifico permisos y parametros validos
-        if (ValidationHelper::verificacionIdRouter($id)) {
+        if (VerificacionAyuda::verificacionIdRouter($id)) {
             try {
                 $marcaEliminada = $this->modelo->borrarMarca($id);
                 if ($marcaEliminada > 0) {
-                    header('Location: ' . BASE_URL . "category");
+                    header('Location: ' . BASE_URL . "marca");
                 } else {
                     $this->alertaVista->mostrarError("error al intentar eliminar");
                 }
@@ -124,6 +124,7 @@ class marcaControlador
                 $caracteristica =htmlspecialchars($_POST['caracteristica']);
                
                 $id = $this->modelo->insertarMarca($origen, $caracteristica);
+                
                 if ($id) {
                     header('Location: ' . BASE_URL . "marca");
                 } else {

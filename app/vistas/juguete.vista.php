@@ -9,7 +9,7 @@ class jugueteVista {
         echo "<h2> $error</h2>";
     }
 
-    public function mostrarJuguete($juguete,$adm) {
+    public function mostrarJuguetes($juguete,$adm) {
         require('./templates/mostrar/tabla.juguete.phtml');        
     }
     

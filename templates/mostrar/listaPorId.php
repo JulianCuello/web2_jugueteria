@@ -9,10 +9,10 @@
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h5 class="card-title"><?= $item->nombreProducto; ?></h5>
-                        <p class="card-text"><?= $item->codigo; ?></p>
-                        <p class="card-text"><strong>Precio:</strong>$<?= $item->precio; ?></p>
-                        <p class="card-text"><strong>Material:</strong> <?= $item->material; ?></p>
+                        <h5 class="card-title"><?= $juguete->nombreProducto; ?></h5>
+                        <p class="card-text"><?= $juguete->codigo; ?></p>
+                        <p class="card-text"><strong>Precio:</strong>$<?= $juguete->precio; ?></p>
+                        <p class="card-text"><strong>Material:</strong> <?= $juguete->material; ?></p>
                         
                         <a href="lista" class="btn btn-primary">Volver</a>
                     </div>

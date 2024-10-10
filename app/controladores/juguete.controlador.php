@@ -19,7 +19,7 @@
         }
 
         public function mostrarJuguetes(){
-            $lista = $this->modelo->mostrarJuguete();
+            $lista = $this->modelo->mostrarJuguetes();
             if ($lista != null) {
                 $this->vista->mostrarJuguetes($lista, AutorizacionAyuda::esAdministrador());
             } else {
@@ -54,7 +54,7 @@
         }
 
         public function eliminarJuguete($id){
-            AuthHelper::verificacion(); //verifico permisos y parametros validos
+            AutorizacionAyuda::verificacion(); //verifico permisos y parametros validos
             if (verificacionAyuda::verificacionAyudaIdRouter($id)) {
                 try {
                     $registroEliminado = $this->modelo->eliminarJuguete($id);
@@ -74,10 +74,10 @@
         public function mostrarFormularioModificacion($id){
             AutorizacionAyuda::verificacion();//verifico permisos y parametros validos
             if (ValidacionAyuda::verificacionIdRouter($id)) {
-                $item = $this->modelo->obtenerJuguetePorId($id);//consulto los tados actuales
-                if ($item != null) {
+                $juguete = $this->modelo->obtenerJuguetePorId($id);//consulto los tados actuales
+                if ($juguete != null) {
                     $marca = $this->modeloMarca->obtenerIdMarca();//consulto las marcas disponibles para modificar
-                    $this->vista->mostrarModificacionFormulario($marca, $item);
+                    $this->vista->mostrarModificacionFormulario($marca, $juguete);
                 } else {
                     $this->alertaVista->mostrarError("error al intentar mostrar formulario");
                 }

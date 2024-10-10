@@ -8,11 +8,11 @@
         }
 
         public function mostrarJuguetes(){
-        
-            $query = $this->db->prepare('SELECT juguete.*, marca.origen FROM juguete JOIN marca ON juguete.id_marca = marca.id_marca;');
+            $query = $this->db->prepare('SELECT * FROM juguete JOIN marca ON juguete.id_marca = marca.id_marca;');
             $query->execute();
-            return $query->fetchAll(PDO::FETCH_OBJ);
+            return $query->fetchAll(PDO::FETCH_OBJ);            
         }
+
         public function seleccionarJuguete($id) {
                 $query = $this->db->prepare('SELECT * FROM `juguete` JOIN marca ON juguete.id_marca=marca.id_marca WHERE id_marca = ?');
                 $query->execute([$id]);
@@ -20,7 +20,7 @@
             }
         }
         function obtenerJuguetesMarcaPorId($id){
-            $query = $this->db->prepare('SELECT juguete.*, marca.marca FROM juguetes JOIN marca ON juguetes.id_marca = marca.id_marca WHERE juguete.id_marca=?');
+            $query = $this->db->prepare('SELECT * FROM juguetes JOIN marca ON juguetes.id_marca = marca.id_marca WHERE juguete.id_marca=?');
             $query->execute([$id]);
             return $query->fetchAll(PDO::FETCH_OBJ);
            

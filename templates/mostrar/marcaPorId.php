@@ -10,10 +10,8 @@
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h5 class="card-title"><?= $marc->nombreProducto; ?></h5>
-                            <p class="card-text"><?= $marc->codigo; ?></p>
-                            <p class="card-text"><strong>Precio:</strong>$<?= $item->precio; ?></p>
-                            <p class="card-text"><strong>Material:</strong> <?= $item->material; ?></p>
+                            <h5 class="card-title"><?= $marc->origen; ?></h5>
+                            <p class="card-text"><?= $marc->caracteristica; ?></p>
                             
                             <a href="marca" class="btn btn-primary">Volver</a>
                         </div>
