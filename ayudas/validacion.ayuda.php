@@ -1,6 +1,6 @@
 <?php
 
-class ValidationHelper{
+class ValidacionAyuda {
     
     //verifica parametros de formularios
     public static function verificarFormulario($params){
@@ -11,7 +11,7 @@ class ValidationHelper{
         }return true;
     }
     //verifica id que se pase por parametro en router
-    public static function verifcacionIdRouter($id){
+    public static function verificacionIdRouter($id){
         if($id!=null&&!empty($id)&&is_numeric($id)){
             return true;
         }else{

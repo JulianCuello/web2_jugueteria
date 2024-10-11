@@ -19,7 +19,7 @@
                 return $query->fetchAll(PDO::FETCH_OBJ);
             }
         }
-        function obtenerJuguetesMarcaPorId($id){
+        function obtenerJuguetePorId($id){
             $query = $this->db->prepare('SELECT * FROM juguetes JOIN marca ON juguetes.id_marca = marca.id_marca WHERE juguete.id_marca=?');
             $query->execute([$id]);
             return $query->fetchAll(PDO::FETCH_OBJ);

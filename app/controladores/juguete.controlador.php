@@ -30,7 +30,7 @@
             if (ValidacionAyuda::verificacionIdRouter($id)){//validacion datos recibidos del router
                 $item = $this->modelo->obtenerJuguetePorId($id);
                 if ($item != null) {
-                    $this->vista->mostrarJugeteJuguetePorId($item);
+                    $this->vista->mostrarJuguetePorId($item);
                 } else {
                     $this->alertaVista->mostrarVacio("no hay elementos para mostrar");
                 }
