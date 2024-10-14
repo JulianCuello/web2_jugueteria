@@ -10,7 +10,7 @@ class jugueteVista {
     }
 
     public function mostrarJuguetes($juguete,$adm) {
-        require('./templates/mostrar/tabla.juguete.phtml');        
+        require('./templates/mostrar/juguete.phtml');        
     }
     
     public function mostrarJuguetePorId($lista) {

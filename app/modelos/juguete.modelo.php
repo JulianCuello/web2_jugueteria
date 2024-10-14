@@ -1,4 +1,5 @@
 <?php
+    require_once './app/modelos/modelo.php';
 
     class JugueteModelo {
         private $db;

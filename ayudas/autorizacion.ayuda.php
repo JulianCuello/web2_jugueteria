@@ -8,11 +8,10 @@ class autorizacionAyuda {
         }
     }
 
-    public static function iniciarSesion($usuario) {
+    public static function inicioSesion($usuario) {
         autorizacionAyuda::inicio();//se ejecuta el metodo para chequear si ya esta iniciada o no
         $_SESSION['USER_ID'] = $usuario->id;//session toma los valores para poder consultar cada vez que se necesite 
         $_SESSION['USER_EMAIL'] = $usuario->email; //dar las autorizaciones
-    
     }
 
     public static function cerrarSesion() {

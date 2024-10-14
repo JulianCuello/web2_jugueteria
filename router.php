@@ -1,5 +1,5 @@
 <?php
-
+require_once './config.php';
 require_once './app/controladores/juguete.controlador.php';
 require_once './app/controladores/marca.controlador.php';
 require_once './app/controladores/autorizacion.controlador.php';
@@ -54,12 +54,12 @@ switch ($params[0]) {
         $jugueteControlador->agregarJuguete();
         break;
     case 'marca':
-        $marcaControlador->mostrarMarca();
+        $marcaControlador->mostrarMarcas();
         break;
     case 'marcaId':
         if(isset($params[1]))
         $marcaControlador->mostrarMarcaPorId($params[1]);
-        else $marcaControlador->mostrarMarca();
+        else $marcaControlador->mostrarMarcas();
         break;
     case 'eliminarMarca':
         if(isset($params[1]))

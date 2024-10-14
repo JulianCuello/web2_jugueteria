@@ -21,20 +21,20 @@ class autorizacionControlador{
         $contraseña = $_POST['contraseña'];
 
         if (empty($email) || empty($contraseña)) {
-            $this->vista->mostrarInicioSesion('Datos incompletos');
+            $this->vista->inicioSesion('Datos incompletos');
             return;
         }
         //busco al usuario en la base
         $usuario = $this->modelo->obtenerPorEmail($email);
 
-        if ($usuario && verificarContraseña($contraseña, $usuario->contraseña)) {
+        if ($usuario && password_verify ($contraseña, $usuario->contraseña)) {
             //si es valida la utenticacion se loguea y redirije.
             AutorizacionAyuda::inicioSesion($usuario);
             header('Location: ' . BASE_URL . "lista");
             exit();
         } else {
             //no fue autenticado.
-            $this->vista->mostrarInicioSesion('Usuario inválido'); 
+            $this->vista->inicioSesion('Usuario inválido'); 
         }
     }
 

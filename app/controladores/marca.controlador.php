@@ -5,8 +5,7 @@ require_once './app/modelos/marca.modelo.php';
 require_once './ayudas/validacion.ayuda.php';
 
 //controller de categorias
-class marcaControlador
-{
+class marcaControlador{
     private $modelo;
     private $modelJuguete;
     private $vista;
@@ -22,11 +21,10 @@ class marcaControlador
     }
 
     //lista completa
-    public function mostrarMarca()
-    {
+    public function mostrarMarcas(){
         $marcas = $this->modelo->obtenerMarca();
         if ($marcas != null) {
-            $this->vista->mostrarMarca($marcas, autorizacionAyuda::esAdministrador());
+            $this->vista->mostrarMarcas($marcas, autorizacionAyuda::esAdministrador());
         } else {
             $this->alertaVista->mostrarVacio("no hay elementos para mostrar");
         }
