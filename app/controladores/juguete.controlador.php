@@ -3,7 +3,8 @@
     require_once './app/vistas/alerta.vista.php';
     require_once './app/modelos/juguete.modelo.php';
     require_once './app/modelos/marca.modelo.php';
-    require_once './ayudas/validacion.ayuda.php';
+    require_once './ayudas/validacion.php';
+    
 
     class jugueteControlador {
         private $modelo;
@@ -21,7 +22,7 @@
         public function mostrarJuguetes(){
             $lista = $this->modelo->mostrarJuguetes();
             if ($lista != null) {
-                $this->vista->mostrarJuguetes($lista, AutorizacionAyuda::esAdministrador());
+                $this->vista->mostrarJuguetes($lista, Autorizacion::esAdministrador());
             } else {
                 $this->alertaVista->mostrarVacio("la lista se encuetra vacia");
             }
@@ -54,8 +55,8 @@
         }
 
         public function eliminarJuguete($id){
-            AutorizacionAyuda::verificacion(); //verifico permisos y parametros validos
-            if (verificacionAyuda::verificacionAyudaIdRouter($id)) {
+            Autorizacion::verificacion(); //verifico permisos y parametros validos
+            if (verificacion::verificacionIdRouter($id)) {
                 try {
                     $registroEliminado = $this->modelo->eliminarJuguete($id);
                     if ($registroEliminado > 0) {
@@ -72,8 +73,8 @@
         } 
 
         public function mostrarFormularioModificacion($id){
-            AutorizacionAyuda::verificacion();//verifico permisos y parametros validos
-            if (ValidacionAyuda::verificacionIdRouter($id)) {
+            Autorizacion::verificacion();//verifico permisos y parametros validos
+            if (Validacion::verificacionIdRouter($id)) {
                 $juguete = $this->modelo->obtenerJuguetePorId($id);//consulto los tados actuales
                 if ($juguete != null) {
                     $marca = $this->modeloMarca->obtenerIdMarca();//consulto las marcas disponibles para modificar
@@ -88,9 +89,9 @@
 
  //enviar datos de modificacion
  public function mostrarModificacion(){
-    autorizacionAyuda::verificacion();
+    Autorizacion::verificacion();
     try {//verifico permisos, parametros validos y posible acceso sin previo acceso al form modificacion.
-        if ($_POST && ValidacionAyuda::verificarFormulario($_POST)) {
+        if ($_POST && Validacion::verificarFormulario($_POST)) {
 
             $id_marca = htmlspecialchars($_POST['id_juguete']);
             $nombreProducto = htmlspecialchars($_POST['nombreProducto']);
@@ -115,15 +116,15 @@
 }
 
 public function mostrarFormularioAlta(){
-    autorizacionAyuda::verificacion();
+    Autorizacion::verificacion();
     $marca = $this->modeloMarca->obtenerIdMarca(); //consulta las marcas disponibles
     $this->vista->mostrarFormulario($marca);
 }
 
 public function agregarJuguete(){
-    AutorizacionAyuda::verificacion();
+    Autorizacion::verificacion();
     try {//verifico permisos, parametros validos y posible acceso sin previo acceso al form alta.
-        if ($_POST && ValidacionAyuda::verificacionFormulario($_POST)) {
+        if ($_POST && Validacion::verificacionFormulario($_POST)) {
             $id_marca = htmlspecialchars($_POST['id_juguete']);
             $nombreProducto = htmlspecialchars($_POST['nombreProducto']);
             $precio = htmlspecialchars($_POST['precio']);

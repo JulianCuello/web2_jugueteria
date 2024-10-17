@@ -1,6 +1,6 @@
 <?php
 
-class ValidacionAyuda {
+class Validacion {
     
     //verifica parametros de formularios
     public static function verificarFormulario($params){

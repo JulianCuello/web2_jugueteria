@@ -1,7 +1,7 @@
 <?php
 require_once './app/vistas/autorizacion.vista.php';
 require_once './app/modelos/usuario.modelo.php';
-require_once './ayudas/autorizacion.ayuda.php';
+require_once './ayudas/autorizacion.php';
 
 class autorizacionControlador{
     private $vista;
@@ -29,7 +29,7 @@ class autorizacionControlador{
 
         if ($usuario && password_verify ($contraseña, $usuario->contraseña)) {
             //si es valida la utenticacion se loguea y redirije.
-            AutorizacionAyuda::inicioSesion($usuario);
+            Autorizacion::inicioSesion($usuario);
             header('Location: ' . BASE_URL . "lista");
             exit();
         } else {
@@ -39,7 +39,7 @@ class autorizacionControlador{
     }
 
     public function cerrarSesion(){
-        AutorizacionAyuda::cerrarSesion();
+        Autorizacion::cerrarSesion();
         header('Location: ' . BASE_URL);
     }
 

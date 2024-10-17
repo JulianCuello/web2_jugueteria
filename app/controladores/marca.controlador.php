@@ -2,7 +2,7 @@
 require_once './app/vistas/marca.vista.php';
 require_once './app/vistas/alerta.vista.php';
 require_once './app/modelos/marca.modelo.php';
-require_once './ayudas/validacion.ayuda.php';
+require_once './ayudas/validacion.php';
 
 //controller de categorias
 class marcaControlador{
@@ -24,7 +24,7 @@ class marcaControlador{
     public function mostrarMarcas(){
         $marcas = $this->modelo->obtenerMarca();
         if ($marcas != null) {
-            $this->vista->mostrarMarcas($marcas, autorizacionAyuda::esAdministrador());
+            $this->vista->mostrarMarcas($marcas, autorizacion::esAdministrador());
         } else {
             $this->alertaVista->mostrarVacio("no hay elementos para mostrar");
         }
@@ -32,7 +32,7 @@ class marcaControlador{
     //lista filtrada
     public function mostrarMarcaPorId($id)
     {
-        if (ValidacionAyuda::verificacionIdRouter($id)) { //validacion datos recibidos del router
+        if (Validacion::verificacionIdRouter($id)) { //validacion datos recibidos del router
             $marca = $this->modeloLista->obtenerJugueteMarcaId($id);//selecciona los items relacionados y la categoria asociada segun parametro
             if ($marca != null) {
                 $this->vista->mostrarJugueteMarcaPorId($marca);
@@ -47,8 +47,8 @@ class marcaControlador{
     //eliminar juguete
     public function eliminarMarca($id)
     {
-        autorizacionAyuda::verificacion(); //verifico permisos y parametros validos
-        if (VerificacionAyuda::verificacionIdRouter($id)) {
+        autorizacion::verificacion(); //verifico permisos y parametros validos
+        if (Verificacion::verificacionIdRouter($id)) {
             try {
                 $marcaEliminada = $this->modelo->borrarMarca($id);
                 if ($marcaEliminada > 0) {
@@ -69,8 +69,8 @@ class marcaControlador{
 
     //mostrar formulario modificacion
     public function mostrarModificacionFormMarca($id){
-        autorizacionAyuda::verificacion(); //verifico permisos y parametros validos
-        if (ValidacionAyuda::verificacionIdRouter($id)) {
+        autorizacion::verificacion(); //verifico permisos y parametros validos
+        if (Validacion::verificacionIdRouter($id)) {
             $marca = $this->modelo->obtenerMarcaId($id);//consulto los datos actuales
             if($marca!=null){
             $this->vista->mostrarModificacionFormMarca($marca);
@@ -85,9 +85,9 @@ class marcaControlador{
 
     //enviar datos de modificacion 
     public function mostrarModificacionMarca(){
-        autorizacionAyuda::verificacion();
+        autorizacion::verificacion();
         try {//verifico permisos, parametros validos y posible acceso sin previo acceso al form modificacion.
-            if ($_POST && ValidacionAyuda::verificacionFormulario($_POST)) {
+            if ($_POST && Validacion::verificacionFormulario($_POST)) {
                 $id_marca =htmlspecialchars($_POST['id_marca']);
                 $origen =htmlspecialchars($_POST['origen']);
                 $caracteristica =htmlspecialchars($_POST['caracteristica']);
@@ -109,14 +109,14 @@ class marcaControlador{
 
     //mostrar formulario altaCategoria
     public function mostrarFormularioMarca(){
-        autorizacionAyuda::verificacion();
+        autorizacion::verificacion();
         $this->vista->mostrarFormularioMarca();
     }
 
     public function agregarMarca(){
-        autorizacionAyuda::verificacion();
+        autorizacion::verificacion();
         try {//verifico permisos, parametros validos y posible acceso sin datos al form de alta.
-            if ($_POST && ValidacionAyuda::verificacionFormulario($_POST)) {
+            if ($_POST && Validacion::verificacionFormulario($_POST)) {
 
                 $origen =htmlspecialchars($_POST['origen']);
                 $caracteristica =htmlspecialchars($_POST['caracteristica']);
