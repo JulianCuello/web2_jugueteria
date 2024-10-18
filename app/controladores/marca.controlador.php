@@ -47,8 +47,8 @@ class marcaControlador{
     //eliminar juguete
     public function eliminarMarca($id)
     {
-        autorizacion::verificacion(); //verifico permisos y parametros validos
-        if (Verificacion::verificacionIdRouter($id)) {
+        Autorizacion::verificacion(); //verifico permisos y parametros validos
+        if (verificacion::verificacionIdRouter($id)) {
             try {
                 $marcaEliminada = $this->modelo->borrarMarca($id);
                 if ($marcaEliminada > 0) {

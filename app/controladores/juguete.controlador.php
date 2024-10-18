@@ -1,9 +1,10 @@
 <?php
-    require_once './app/vistas/marca.vista.php';
+    require_once './app/vistas/juguete.vista.php';
     require_once './app/vistas/alerta.vista.php';
     require_once './app/modelos/juguete.modelo.php';
     require_once './app/modelos/marca.modelo.php';
-    require_once './ayudas/validacion.php';
+    require_once './ayudas/autorizacion.php';
+
     
 
     class jugueteControlador {
@@ -13,6 +14,7 @@
         private $modeloMarca;
 
         public function __construct() {
+        
         $this->modelo = new JugueteModelo();
         $this->vista = new JugueteVista();
         $this->modeloMarca = new MarcaModelo();
@@ -28,7 +30,7 @@
             }
         }
         public function mostrarJuguetePorId($id){
-            if (ValidacionAyuda::verificacionIdRouter($id)){//validacion datos recibidos del router
+            if (Validacion::verificacionIdRouter($id)){//validacion datos recibidos del router
                 $item = $this->modelo->obtenerJuguetePorId($id);
                 if ($item != null) {
                     $this->vista->mostrarJuguetePorId($item);
@@ -56,9 +58,9 @@
 
         public function eliminarJuguete($id){
             Autorizacion::verificacion(); //verifico permisos y parametros validos
-            if (verificacion::verificacionIdRouter($id)) {
+            if (Validacion::verificacionIdRouter($id)) {
                 try {
-                    $registroEliminado = $this->modelo->eliminarJuguete($id);
+                    $registroEliminado = $this->modelo->borrarJuguete($id);
                     if ($registroEliminado > 0) {
                         header('Location: ' . BASE_URL . "lista");
                     } else {
@@ -75,10 +77,10 @@
         public function mostrarFormularioModificacion($id){
             Autorizacion::verificacion();//verifico permisos y parametros validos
             if (Validacion::verificacionIdRouter($id)) {
-                $juguete = $this->modelo->obtenerJuguetePorId($id);//consulto los tados actuales
-                if ($juguete != null) {
+                $item = $this->modelo->obtenerJuguetePorId($id);//consulto los tados actuales
+                if ($item != null) {
                     $marca = $this->modeloMarca->obtenerIdMarca();//consulto las marcas disponibles para modificar
-                    $this->vista->mostrarModificacionFormulario($marca, $juguete);
+                    $this->vista->mostrarModificacionFormulario($marca, $item);
                 } else {
                     $this->alertaVista->mostrarError("error al intentar mostrar formulario");
                 }

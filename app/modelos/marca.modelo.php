@@ -1,7 +1,7 @@
 <?php
 require_once './app/modelos/modelo.php';
 
-class marcaModelo extends Modelo {
+class marcaModelo {
     
     
    function obtenerMarca(){

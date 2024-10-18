@@ -1,13 +1,8 @@
 <?php
     require_once './app/modelos/modelo.php';
 
-    class JugueteModelo {
-        private $db;
-
-        public function __construct() {
-        $this->db = new PDO('mysql:host=localhost;dbname=db_jugueteria;charset=utf8', 'root', '');
-        }
-
+    class JugueteModelo extends Modelo{
+       
         public function mostrarJuguetes(){
             $query = $this->db->prepare('SELECT * FROM juguete JOIN marca ON juguete.id_marca = marca.id_marca;');
             $query->execute();
@@ -21,7 +16,7 @@
             }
         }
         function obtenerJuguetePorId($id){
-            $query = $this->db->prepare('SELECT * FROM juguetes JOIN marca ON juguetes.id_marca = marca.id_marca WHERE juguete.id_marca=?');
+            $query = $this->db->prepare('SELECT * FROM juguete JOIN marca ON juguetes.id_marca = marca.id_marca WHERE juguete.id_marca=?');
             $query->execute([$id]);
             return $query->fetchAll(PDO::FETCH_OBJ);
            
@@ -36,11 +31,12 @@
             return $this->db->lastInsertId();
         }
        
-        function eliminarJuguete($id){
-            $query = $this->db->prepare ('DELETE FROM juguete WHERE id = ?');
+        function borrarJuguete($id) {
+            $query = $this->db->prepare('DELETE FROM juguete WHERE id_juguete = ?');
             $query->execute([$id]);
             return $query->rowCount();
         }
+    
         
         function actualizarJuguete($id_juguete,$nombreProducto,$precio, $material, $codigo, $img){
             $query = $this->db->prepare('UPDATE juguete SET nombreProducto=?,precio=?,material=?,codigo=?,img=? WHERE id_marca=?');
