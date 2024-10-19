@@ -60,7 +60,7 @@
             Autorizacion::verificacion(); //verifico permisos y parametros validos
             if (Validacion::verificacionIdRouter($id)) {
                 try {
-                    $registroEliminado = $this->modelo->borrarJuguete($id);
+                    $registroEliminado = $this->modelo->eliminarJuguete($id);
                     if ($registroEliminado > 0) {
                         header('Location: ' . BASE_URL . "lista");
                     } else {
