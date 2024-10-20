@@ -2,7 +2,7 @@
    
 class marcaVista{
 
-    public function mostrarMarcas($marca,$adm){
+    public function demostrarMarcas($marca,$adm){
         require './templates/mostrar/marca.phtml';
     }
 

@@ -53,7 +53,7 @@ switch ($params[0]) {
     case 'agregarJuguete':
         $jugueteControlador->agregarJuguete();
         break;
-    case 'listaMarcas':
+    case 'marca':
         $marcaControlador->mostrarMarcas();
         break;
     case 'marcaId':

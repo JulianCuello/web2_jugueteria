@@ -1,64 +1,30 @@
 <?php
-
-class marcaLista {
-
-function mostrarJuguetes($marcas) {
-    require_once "templates/header.phtml";
-    ?>
-    <main class="container my-4">
-        <section class="juguetes">
-            <div class="row">
-                <?php 
-                foreach ($marcas as $index => $marca) { 
-                ?>
-                    <div class="col-md-4 mb-4">
-                        <div class="card">
-                        <img src="<?php echo htmlspecialchars($marca->img); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($marca->id_marca); ?>">
-
-                            <div class="card-body">
-                                <h5 class="card-title"><?php echo htmlspecialchars($marca->origen); ?></h5>
-                                <p class="card-text"><?php echo htmlspecialchars($marca->caracteristica); ?></p>
-                                <a href="juguete/<?php echo $index; ?>" class="btn btn-outline-primary me-2">Leer más</a>
-                                <?php if (Autorizacion::esAdministrador()) { ?>
-                                <a href="actualizarJuguete/<?php echo $marca->id_marca; ?>" class='btn btn-success me-2'>Modificar</a>
-                                <a href="eliminarJuguete/<?php echo $marca->id_marca; ?>" class='btn btn-danger'>Eliminar</a>
-                                <?php } ?>
-                            </div>
-                        </div>
+require './templates/tareas/header.phtml';   
+?>
+<div class="container mt-4">
+    <div class="row">
+        <?php foreach($marcas as $marca) { ?>      
+            <div class="col-md-4 mb-4"> 
+                <div class="card">
+                    <img src="<?= htmlspecialchars($marca->imgMarca); ?>" class="card-img-top" alt="<?= htmlspecialchars($marca->nombreMarca); ?>">
+                    <div class="card-body">
+                        <h5 class="card-title"><?= htmlspecialchars($marca->nombreMarca); ?></h5>
+                        <p class="card-text">
+                            <strong>Origen:</strong> <?= htmlspecialchars($marca->origen); ?><br>
+                            <strong>Categoría:</strong> <?= htmlspecialchars($marca->categoria); ?><br>
+                            <strong>Nombre de Marca:</strong> <?= htmlspecialchars($marca->nombreMarca); ?>
+                        </p>
+                        <a href="marca_id/<?= $marca->id_marca; ?>" class="btn btn-primary">Ver Productos</a>
+                        <?php if (Autorizacion::esAdministrador()) { ?>
+                            <a href="eliminarMarca/<?= $marca->id_marca; ?>" class="btn btn-danger">Eliminar</a>
+                            <a href="modificarMarcaFormulario/<?= $marca->id_marca; ?>" class="btn btn-success">Modificar</a>
+                        <?php } ?>
                     </div>
-                <?php 
-                } 
-                ?>
-            </div>
-        </section>
-    </main>
-    <?php
-    require_once "templates/mostrar/footer.phtml";
-}
-
-function mostrarJuguete($id) {
-    require_once "templates/header.phtml";
-
-    // Verificar si el juguete existe
-    $marca = seleccionarJuguete($id);
-    if (!$marca) {
-        echo "<p>Juguete no encontrado.</p>";
-        require_once "templates/footer.php";
-        return;
-    }
-
-    ?>
-    <main class="container my-4">
-        <section class="juguete">
-            <div class="card" style="width: 18rem;">
-                <h1><?php echo htmlspecialchars($marca->id_marca); ?></h1>
-                <p class="lead mt-3"><?php echo htmlspecialchars($marca->origen); ?></p>
-                <a href="#" class="btn btn-primary mb-2">Comprar</a>
-                <img class="juguete-image img-fluid" src="<?php echo htmlspecialchars($marca->caracteristica); ?>" alt="Imagen del juguete">
-            </div>
-        </section>
-    </main>
-    <?php
-    require_once "templates/footer.phtml";
-    }
-}
+                </div>
+            </div>      
+        <?php } ?>
+    </div>
+</div>
+<?php
+require_once 'templates/tareas/footer.phtml';
+?>

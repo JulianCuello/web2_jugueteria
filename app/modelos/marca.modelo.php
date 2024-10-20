@@ -16,8 +16,8 @@ class marcaModelo extends Modelo {
         return $query->fetchAll(PDO::FETCH_OBJ);       
     }
     
-    function insertarMarca($origen, $caracteristica){
-        $query = $this->db->prepare('INSERT INTO marca (id_marca, origen, caracteristica, nombreMarca) VALUES(?,?,?,?)');
+    function insertarMarca($id_marca,$origen, $caracteristica, $nombreMarca, $imgMarca){
+        $query = $this->db->prepare('INSERT INTO marca (id_marca, origen, caracteristica, nombreMarca, imgMarca) VALUES(?,?,?,?,?)');
         $query->execute([$origen, $caracteristica]);
         return $this->db->lastInsertId();
     }
@@ -26,7 +26,7 @@ class marcaModelo extends Modelo {
         $query->execute([$id]);
         return $query->rowCount();
     }
-    function modificarMarca($id_marca, $origen, $caracteristica){
+    function modificarMarca($id_marca, $origen, $caracteristica,$nombreMarca, $imgMarca){
         $query = $this->db->prepare('UPDATE marca SET origen=?,caracteristica=? WHERE id_marca=?');
         $query->execute([$origen, $caracteristica]);
         return $query->rowCount();

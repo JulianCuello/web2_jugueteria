@@ -11,8 +11,7 @@ class marcaControlador{
     private $vista;
     private $alertaVista;
 
-    public function __construct()
-    {
+    public function __construct(){
         //se instancian los dos modelos para no delegar mal, y que cada modelo acceda a su tabla correspondiente.
         $this->modelo = new marcaModelo();
         $this->modeloJuguete = new JugueteModelo();
@@ -20,11 +19,11 @@ class marcaControlador{
         $this->alertaViesta = new AlertaVista();
     }
 
-    //lista completa
+    //lista marcas completa
     public function mostrarMarcas(){
         $marcas = $this->modelo->obtenerMarcas();
         if ($marcas != null) {
-            $this->vista->mostrarMarcas($marcas, autorizacion::esAdministrador());
+            $this->vista->demostrarMarcas($marcas, Autorizacion::esAdministrador());
         } else {
             $this->alertaVista->mostrarVacio("no hay elementos para mostrar");
         }
@@ -69,7 +68,7 @@ class marcaControlador{
 
     //mostrar formulario modificacion
     public function mostrarModificacionFormMarca($id){
-        autorizacion::verificacion(); //verifico permisos y parametros validos
+        Autorizacion::verificacion(); //verifico permisos y parametros validos
         if (Validacion::verificacionIdRouter($id)) {
             $marca = $this->modelo->obtenerMarcaId($id);//consulto los datos actuales
             if($marca!=null){
@@ -85,13 +84,14 @@ class marcaControlador{
 
     //enviar datos de modificacion 
     public function mostrarModificacionMarca(){
-        autorizacion::verificacion();
+        Autorizacion::verificacion();
         try {//verifico permisos, parametros validos y posible acceso sin previo acceso al form modificacion.
             if ($_POST && Validacion::verificacionFormulario($_POST)) {
                 $id_marca =htmlspecialchars($_POST['id_marca']);
                 $origen =htmlspecialchars($_POST['origen']);
                 $caracteristica =htmlspecialchars($_POST['caracteristica']);
                 $nombreMarca =htmlspecialchars($_POST['nombreMarca']);
+                $imgMarca =htmlspecialchars($_POST['imgMarca']);
 
                 
                 $marcaModificada = $this->modelo->modificacionJuguete($id_marca, $origen, $caracteristica);
@@ -128,7 +128,7 @@ class marcaControlador{
                 if ($id) {
                     header('Location: ' . BASE_URL . "marca");
                 } else {
-                    $this->alertaVista->mostrarError("Error al insertar la categoria");
+                    $this->alertaVista->mostrarError("Error al insertar la marca");
                 }
             } else {
                 $this->alertaVista->mostrarError("Error-El formulario no pudo ser procesado,
