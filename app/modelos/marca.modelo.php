@@ -1,23 +1,23 @@
 <?php
 require_once './app/modelos/modelo.php';
 
-class marcaModelo {
+class marcaModelo extends Modelo {
     
+   function obtenerMarcas(){
     
-   function obtenerMarca(){
         $query = $this->db->prepare('SELECT * FROM `marca`');
         $query->execute();
         return $query->fetchAll(PDO::FETCH_OBJ);       
     }
+    
     function obtenerMarcaPorId($id){
         $query = $this->db->prepare('SELECT * FROM `marca` WHERE id_marca=?');
         $query->execute([$id]);
         return $query->fetchAll(PDO::FETCH_OBJ);       
     }
     
-    
     function insertarMarca($origen, $caracteristica){
-        $query = $this->db->prepare('INSERT INTO marca (origen, caracteristica) VALUES(?,?)');
+        $query = $this->db->prepare('INSERT INTO marca (id_marca, origen, caracteristica, nombreMarca) VALUES(?,?,?,?)');
         $query->execute([$origen, $caracteristica]);
         return $this->db->lastInsertId();
     }
@@ -32,7 +32,7 @@ class marcaModelo {
         return $query->rowCount();
     }
     function obtenerIdMarca(){ 
-        $query = $this->db->prepare('SELECT marca.id_marca,marca.marca FROM marca;');
+        $query = $this->db->prepare('SELECT marca.id_marca FROM marca;');
         $query->execute();
         return $query->fetchAll(PDO::FETCH_OBJ);
     }

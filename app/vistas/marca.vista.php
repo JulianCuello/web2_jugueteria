@@ -3,7 +3,7 @@
 class marcaVista{
 
     public function mostrarMarcas($marca,$adm){
-        require './templates/mostrar/lista.marcas.phtml';
+        require './templates/mostrar/marca.phtml';
     }
 
     public function mostrarJuguetesMarcaPorId($marca){

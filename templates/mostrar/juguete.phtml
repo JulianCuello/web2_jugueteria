@@ -14,11 +14,14 @@ require 'templates/tareas/header.phtml';
                             <strong>Precio:</strong> <?php echo $item->precio; ?><br>
                             <strong>Material:</strong> <?php echo $item->material; ?><br>
                             <strong>Código:</strong> <?php echo $item->codigo; ?>
+                             
                         </p>
+                        
                         <a href="jugueteId/<?php echo $item->id_juguete; ?>" class="btn btn-primary">Ver Producto</a>
+                        <?php if (Autorizacion::esAdministrador()) { ?>
                         <a href="eliminarJuguete/<?php echo $item->id_juguete; ?>" class="btn btn-danger">Eliminar</a>
                         <a href="actualizarJuguete/<?php echo $item->id_juguete; ?>" class="btn btn-success">Modificar</a>
-                        <a href="agregarJuguete/<?php echo $item->id_juguete; ?>" class="btn btn-primary">Agregar</a>
+                        <?php } ?>
                     </div>
                 </div>
             </div>      

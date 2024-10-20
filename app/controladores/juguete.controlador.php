@@ -47,11 +47,12 @@
             $nombreProducto = $_POST['nombreProducto'];
             $precio = $_POST['precio'];
             $material = $_POST['material'];
+            $id_marca = $_POST['id_marca'];
             $codigo = $_POST['codigo'];
             $img = $_POST['img'];
 
 
-            $id = $this->modelo->insertarJuguete($id_juguete, $nombreProducto, $precio, $material, $codigo, $img);
+            $id = $this->modelo->insertarJuguete($id_juguete, $nombreProducto, $precio, $material,$id_marca, $codigo, $img);
 
             header('Location: ' . BASE_URL);
         }
@@ -60,7 +61,7 @@
             Autorizacion::verificacion(); //verifico permisos y parametros validos
             if (Validacion::verificacionIdRouter($id)) {
                 try {
-                    $registroEliminado = $this->modelo->eliminarJuguete($id);
+                    $registroEliminado = $this->modelo->borrarJuguete($id);
                     if ($registroEliminado > 0) {
                         header('Location: ' . BASE_URL . "lista");
                     } else {
@@ -123,41 +124,33 @@ public function mostrarFormularioAlta(){
     $this->vista->mostrarFormulario($marca);
 }
 
-public function agregarJuguete(){
+public function agregarJuguete() {
     Autorizacion::verificacion();
-    try {//verifico permisos, parametros validos y posible acceso sin previo acceso al form alta.
+    try {
         if ($_POST && Validacion::verificacionFormulario($_POST)) {
-            $id_marca = htmlspecialchars($_POST['id_juguete']);
+            $id_juguete = htmlspecialchars($_POST['id_juguete']);
             $nombreProducto = htmlspecialchars($_POST['nombreProducto']);
             $precio = htmlspecialchars($_POST['precio']);
             $material = htmlspecialchars($_POST['material']);
+            $id_marca = htmlspecialchars($_POST['id_marca']);
             $codigo = htmlspecialchars($_POST['codigo']);
             $img = htmlspecialchars($_POST['img']);
 
-            $id = $this->modelo->insertarJuguete($id_juguete, $nombreProducto, $precio, $material, $codigo, $img);
+            // Asegúrate de que todos los campos estén presentes y correctamente asignados
+            $id = $this->modelo->insertarJuguete($id_juguete, $nombreProducto, $precio, $material, $id_marca, $codigo, $img);
 
             if ($id) {
-                header('Location: ' . BASE_URL . "list");
+                header('Location: ' . BASE_URL . "lista");
+                exit; // Asegúrate de detener la ejecución después de redirigir
             } else {
-                $this->alertaVista->mostrarError("Error al insertar la tarea");
+                $this->alertaVista->mostrarError("Error al insertar el juguete.");
             }
         } else {
-            $this->alertaVista->mostrarError("Error-El formulario no pudo ser procesado, asegurate de que hayas completado todos los campos");
+            $this->alertaVista->mostrarError("Error: el formulario no pudo ser procesado. Asegúrate de que hayas completado todos los campos.");
         }
-        
     } catch (PDOException $error) {
-        $this->alertaVista->mostrarError("Error en la consulta a la base de datos/$error");
+        $this->alertaVista->mostrarError("Error en la consulta a la base de datos: " . $error->getMessage());
     }
-    }
+}
 
-        public function guardarJuguete($id) { 
-            $juguete = $this->modelo->seleccionarJuguete($id);
-
-            if (!$juguete){
-                return $this->vista->mostrarError('no se puede guardar el juguete');
-                
-            }
-            $this->modelo->actualizarJuguete($id);
-            header('Location: ' . BASE_URL);
-        }    
     }

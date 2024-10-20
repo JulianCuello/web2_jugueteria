@@ -21,14 +21,19 @@
             $query->execute([$id]);
                 return $query->fetchAll(PDO::FETCH_OBJ);
             }
-        function insertarJuguete ($id_juguete,$nombreProducto,$precio, $material, $codigo, $img){
-            $query =$this->db-> prepare ('INSERT INTO juguete (id_juguete,nombreProducto, precio, material, id_marca, codigo) VALUES (?, ?, ?, ?, ? )');
-            $query ->execute ([$id_juguete, $nombreProducto, $precio, $material, $id_marca,$codigo, $img]);
-    
-            return $this->db->lastInsertId();
-        }
-       
-        public function eliminarJuguete($id) {
+
+            function insertarJuguete($nombreProducto, $precio, $material, $id_marca, $codigo, $img) {
+                try {
+                    $query = $this->db->prepare('INSERT INTO juguete (nombreProducto, precio, material, id_marca, codigo, img) VALUES (?, ?, ?, ?, ?, ?)');
+                    $query->execute([$nombreProducto, $precio, $material,$id_marca, $codigo, $img]);
+                    return $this->db->lastInsertId();
+                } catch (PDOException $error) {
+                    throw new Exception("Error al insertar el juguete: " . $error->getMessage());
+                }
+            }
+            
+
+        public function borrarJuguete($id) {
             $query = $this->db->prepare('DELETE FROM juguete WHERE id_juguete = ?');
             $query->execute([$id]);
             return $query->rowCount();

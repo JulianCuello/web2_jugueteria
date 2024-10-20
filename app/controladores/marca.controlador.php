@@ -22,7 +22,7 @@ class marcaControlador{
 
     //lista completa
     public function mostrarMarcas(){
-        $marcas = $this->modelo->obtenerMarca();
+        $marcas = $this->modelo->obtenerMarcas();
         if ($marcas != null) {
             $this->vista->mostrarMarcas($marcas, autorizacion::esAdministrador());
         } else {
@@ -91,6 +91,8 @@ class marcaControlador{
                 $id_marca =htmlspecialchars($_POST['id_marca']);
                 $origen =htmlspecialchars($_POST['origen']);
                 $caracteristica =htmlspecialchars($_POST['caracteristica']);
+                $nombreMarca =htmlspecialchars($_POST['nombreMarca']);
+
                 
                 $marcaModificada = $this->modelo->modificacionJuguete($id_marca, $origen, $caracteristica);
                 if ($marcaModificada > 0) {

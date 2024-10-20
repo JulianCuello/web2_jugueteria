@@ -1,9 +1,9 @@
 <?php
 
-class marcaVLista {
+class marcaLista {
 
 function mostrarJuguetes($marcas) {
-    require_once "templates/header.php";
+    require_once "templates/header.phtml";
     ?>
     <main class="container my-4">
         <section class="juguetes">
@@ -13,13 +13,16 @@ function mostrarJuguetes($marcas) {
                 ?>
                     <div class="col-md-4 mb-4">
                         <div class="card">
-                            <img src="<?php echo htmlspecialchars($marca->img); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($marca->id_marca); ?>">
+                        <img src="<?php echo htmlspecialchars($marca->img); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($marca->id_marca); ?>">
+
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo htmlspecialchars($marca->origen); ?></h5>
                                 <p class="card-text"><?php echo htmlspecialchars($marca->caracteristica); ?></p>
                                 <a href="juguete/<?php echo $index; ?>" class="btn btn-outline-primary me-2">Leer más</a>
+                                <?php if (Autorizacion::esAdministrador()) { ?>
                                 <a href="actualizarJuguete/<?php echo $marca->id_marca; ?>" class='btn btn-success me-2'>Modificar</a>
                                 <a href="eliminarJuguete/<?php echo $marca->id_marca; ?>" class='btn btn-danger'>Eliminar</a>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>
@@ -30,11 +33,11 @@ function mostrarJuguetes($marcas) {
         </section>
     </main>
     <?php
-    require_once "templates/footer.php";
+    require_once "templates/mostrar/footer.phtml";
 }
 
 function mostrarJuguete($id) {
-    require_once "templates/header.php";
+    require_once "templates/header.phtml";
 
     // Verificar si el juguete existe
     $marca = seleccionarJuguete($id);
@@ -56,6 +59,6 @@ function mostrarJuguete($id) {
         </section>
     </main>
     <?php
-    require_once "templates/footer.php";
+    require_once "templates/footer.phtml";
     }
 }
