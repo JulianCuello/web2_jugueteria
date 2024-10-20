@@ -3,7 +3,7 @@
 class Validacion {
     
     //verifica parametros de formularios
-    public static function verificarFormulario($params){
+    public static function verificacionFormulario($params){
         foreach($params as $param=>$paramValue){
             if(!isset($paramValue)|| empty($paramValue)){
                 return false;

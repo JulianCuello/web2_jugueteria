@@ -29,10 +29,9 @@ class marcaControlador{
         }
     }
     //lista filtrada
-    public function mostrarMarcaPorId($id)
-    {
+    public function mostrarMarcaPorId($id){
         if (Validacion::verificacionIdRouter($id)) { //validacion datos recibidos del router
-            $marca = $this->modeloLista->obtenerJugueteMarcaId($id);//selecciona los items relacionados y la categoria asociada segun parametro
+            $marca = $this->modeloLista->obtenerMarcaId($id);//selecciona los items relacionados y la categoria asociada segun parametro
             if ($marca != null) {
                 $this->vista->mostrarJugueteMarcaPorId($marca);
             } else {
@@ -111,12 +110,12 @@ class marcaControlador{
 
     //mostrar formulario altaCategoria
     public function mostrarFormularioMarca(){
-        autorizacion::verificacion();
+        Autorizacion::verificacion();
         $this->vista->mostrarFormularioMarca();
     }
 
     public function agregarMarca(){
-        autorizacion::verificacion();
+        Autorizacion::verificacion();
         try {//verifico permisos, parametros validos y posible acceso sin datos al form de alta.
             if ($_POST && Validacion::verificacionFormulario($_POST)) {
 

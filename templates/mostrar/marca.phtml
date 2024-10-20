@@ -6,12 +6,13 @@ require './templates/tareas/header.phtml';
         <?php foreach($marcas as $marca) { ?>      
             <div class="col-md-4 mb-4"> 
                 <div class="card">
-                    <img src="<?= htmlspecialchars($marca->imgMarca); ?>" class="card-img-top" alt="<?= htmlspecialchars($marca->nombreMarca); ?>">
+                <img src="<?= htmlspecialchars($marca->imgMarca); ?>" class="card-img-top" alt="<?= htmlspecialchars($marca->nombreMarca); ?>">
+
                     <div class="card-body">
                         <h5 class="card-title"><?= htmlspecialchars($marca->nombreMarca); ?></h5>
                         <p class="card-text">
                             <strong>Origen:</strong> <?= htmlspecialchars($marca->origen); ?><br>
-                            <strong>Categoría:</strong> <?= htmlspecialchars($marca->categoria); ?><br>
+                            <strong>caracteristica:</strong> <?= htmlspecialchars($marca->característica); ?><br>
                             <strong>Nombre de Marca:</strong> <?= htmlspecialchars($marca->nombreMarca); ?>
                         </p>
                         <a href="marca_id/<?= $marca->id_marca; ?>" class="btn btn-primary">Ver Productos</a>

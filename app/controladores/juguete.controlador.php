@@ -41,22 +41,7 @@
                 $this->alertaVista->mostrarError("404-Not-Found");
             }
         }
-        public function agregarJuguetes() {
-            
-            $id_juguete = $_POST['id_juguete'];
-            $nombreProducto = $_POST['nombreProducto'];
-            $precio = $_POST['precio'];
-            $material = $_POST['material'];
-            $id_marca = $_POST['id_marca'];
-            $codigo = $_POST['codigo'];
-            $img = $_POST['img'];
-
-
-            $id = $this->modelo->insertarJuguete($id_juguete, $nombreProducto, $precio, $material,$id_marca, $codigo, $img);
-
-            header('Location: ' . BASE_URL);
-        }
-
+        
         public function eliminarJuguete($id){
             Autorizacion::verificacion(); //verifico permisos y parametros validos
             if (Validacion::verificacionIdRouter($id)) {
@@ -128,7 +113,8 @@ public function agregarJuguete() {
     Autorizacion::verificacion();
     try {
         if ($_POST && Validacion::verificacionFormulario($_POST)) {
-            $id_juguete = htmlspecialchars($_POST['id_juguete']);
+            // Obtén y limpia los datos del formulario
+            
             $nombreProducto = htmlspecialchars($_POST['nombreProducto']);
             $precio = htmlspecialchars($_POST['precio']);
             $material = htmlspecialchars($_POST['material']);
@@ -136,12 +122,11 @@ public function agregarJuguete() {
             $codigo = htmlspecialchars($_POST['codigo']);
             $img = htmlspecialchars($_POST['img']);
 
-            // Asegúrate de que todos los campos estén presentes y correctamente asignados
-            $id = $this->modelo->insertarJuguete($id_juguete, $nombreProducto, $precio, $material, $id_marca, $codigo, $img);
+            // Inserta el juguete en la base de datos
+            $id = $this->modelo->insertarJuguete($nombreProducto, $precio, $material, $id_marca, $codigo, $img);
 
             if ($id) {
                 header('Location: ' . BASE_URL . "lista");
-                exit; // Asegúrate de detener la ejecución después de redirigir
             } else {
                 $this->alertaVista->mostrarError("Error al insertar el juguete.");
             }
@@ -152,5 +137,4 @@ public function agregarJuguete() {
         $this->alertaVista->mostrarError("Error en la consulta a la base de datos: " . $error->getMessage());
     }
 }
-
-    }
+ }
