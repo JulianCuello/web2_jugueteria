@@ -18,7 +18,7 @@ class marcaModelo extends Modelo {
     
     function insertarMarca($id_marca,$origen, $caracteristica, $nombreMarca, $imgMarca){
         $query = $this->db->prepare('INSERT INTO marca (id_marca, origen, caracteristica, nombreMarca, imgMarca) VALUES(?,?,?,?,?)');
-        $query->execute([$origen, $caracteristica]);
+        $query->execute([$id_marca, $origen, $caracteristica, $caracteristica, $nombreMarca, $imgMarca]);
         return $this->db->lastInsertId();
     }
     function eliminarMarca($id){

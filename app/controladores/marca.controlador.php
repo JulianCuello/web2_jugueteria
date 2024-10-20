@@ -119,10 +119,14 @@ class marcaControlador{
         try {//verifico permisos, parametros validos y posible acceso sin datos al form de alta.
             if ($_POST && Validacion::verificacionFormulario($_POST)) {
 
+                $id_marca =htmlspecialchars($_POST['id_marca']);
                 $origen =htmlspecialchars($_POST['origen']);
                 $caracteristica =htmlspecialchars($_POST['caracteristica']);
+                $nombreMarca =htmlspecialchars($_POST['nombreMarca']);
+                $imgMarca =htmlspecialchars($_POST['imgMarca']);
+
                
-                $id = $this->modelo->insertarMarca($origen, $caracteristica);
+                $id = $this->modelo->insertarMarca($id_marca,$origen, $caracteristica, $nombreMarca, $imgMarca);
                 
                 if ($id) {
                     header('Location: ' . BASE_URL . "marca");

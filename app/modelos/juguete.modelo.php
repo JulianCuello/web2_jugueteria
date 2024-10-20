@@ -23,14 +23,11 @@
             }
 
             function insertarJuguete($nombreProducto, $precio, $material, $id_marca, $codigo, $img) {
-                try {
-                    $query = $this->db->prepare('INSERT INTO juguete (nombreProducto, precio, material, id_marca, codigo, img) VALUES (?, ?, ?, ?, ?, ?)');
-                    $query->execute([$nombreProducto, $precio, $material, $id_marca, $codigo, $img]);
-                    return $this->db->lastInsertId();
-                } catch (PDOException $error) {
-                    throw new Exception("Error al insertar el juguete: " . $error->getMessage());
-                }
+                $query = $this->db->prepare('INSERT INTO juguete (nombreProducto, precio, material, id_marca, codigo, img) VALUES (?, ?, ?, ?, ?, ?)');
+                $query->execute([$nombreProducto, $precio, $material, $id_marca, $codigo, $img]); // Corrección aquí
+                return $this->db->lastInsertId();
             }
+            
             
         public function borrarJuguete($id) {
             $query = $this->db->prepare('DELETE FROM juguete WHERE id_juguete = ?');

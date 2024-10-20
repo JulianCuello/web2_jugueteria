@@ -7,7 +7,28 @@ require_once './app/controladores/mostrar.controlador.php';
 
 define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
 
-//    TABLA DE RUTEO
+//                                              TABLA DE RUTEO
+/*
+  tabla ruteo                controller                                          descripc                                    
+| lista                  -> |ListaControlador |mostrarJuguetes()       |lista productos (juguetes)            |
+| listaId/:id            -> |ListaControlador |mostrarListaPorId(id)   |lista producto por id                 |
+| eliminarJuguete/:id    -> |ListaControlador    |eliminarJugete(id)          |elimina registro de juguete    |
+| modificarJugeteFormulario/:id-> |ListaControlador   |mostrarFormularioModificacion(id)      |redirige a formulario de modificacion |
+| modificarJuguete          -> |ListaControlador   |mostrarModificacion()    |envia formulario con modificacion     |
+| agregarJugueteFormulario  -> |ListaControlador    |mostrarFormularioAlta() |redirige a formulario alta producto   |
+| agregarJuguete()                -> |ListaControlador    |agregarJuguete()  |envia formulario y crea nuevo producto|
+|---------------------------|------------------|------------------------|--------------------------------------|
+| marca                     -> |marcacontrolador|mostrarMarcas()            |lista marcas                      |
+| marcaId/:id               -> |marcacontrolador|mostrarMarcaPorId()          |lista marca por id                |
+| elminarMarca/:id     -> |marcacontrolador|elminiarMarca()                 |elimina registro de marca         |
+| modificarMarcaFormulario/:id -> |marcacontrolador|FormularioMarcaModificacion()|redirige a formulario de modificacion |
+| modificarMarca         -> |marcacontrolador|mostrarMarcaModificacion()    |envia formulario con modificacion     |
+| agregarMarcaFormulario  -> |marcacontrolador|mostrarFormularioMarca()   |redirige a formulario alta marca  |
+| agregarMarca            -> |marcacontrolador|agregarMarca()                |envia formulario ,crea nueva marca|
+|---------------------------|------------------|------------------------|--------------------------------------|
+| inicioSesion                  -> |AutorizacionControlador    |inicioSesion()             |                                      |
+| cerrarSesion                 -> |AutorizacionControlador    |cerrarSesion()            |                                      |
+*/
 
 
 if (!empty($_GET["action"])){
