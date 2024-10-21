@@ -16,12 +16,12 @@ class marcaModelo extends Modelo {
         return $query->fetch(PDO::FETCH_OBJ); 
     }
     
-    function insertarMarca($id_marca,$origen, $caracteristica, $nombreMarca, $imgMarca){
-        $query = $this->db->prepare('INSERT INTO marca (id_marca, origen, caracteristica, nombreMarca, imgMarca) VALUES(?,?,?,?,?)');
-        $query->execute([$id_marca, $origen, $caracteristica, $caracteristica, $nombreMarca, $imgMarca]);
+    function insertarMarca($origen, $caracteristica, $nombreMarca, $imgMarca){
+        $query = $this->db->prepare('INSERT INTO marca (origen, caracteristica, nombreMarca, imgMarca) VALUES(?,?,?,?)');
+        $query->execute([$origen, $caracteristica, $nombreMarca, $imgMarca]);
         return $this->db->lastInsertId();
     }
-    function eliminarMarca($id){
+    function borrarMarca($id){
         $query = $this->db->prepare('DELETE FROM marca WHERE id_marca = ?');
         $query->execute([$id]);
         return $query->rowCount();

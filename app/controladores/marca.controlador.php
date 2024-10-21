@@ -3,11 +3,12 @@ require_once './app/vistas/marca.vista.php';
 require_once './app/vistas/alerta.vista.php';
 require_once './app/modelos/marca.modelo.php';
 require_once './ayudas/validacion.php';
+require_once './ayudas/autorizacion.php';
 
 //controller de categorias
 class marcaControlador{
     private $modelo;
-    private $modelJuguete;
+    private $modeloJuguete;
     private $vista;
     private $alertaVista;
 
@@ -46,7 +47,7 @@ class marcaControlador{
     public function eliminarMarca($id)
     {
         Autorizacion::verificacion(); //verifico permisos y parametros validos
-        if (verificacion::verificacionIdRouter($id)) {
+        if (Validacion::verificacionIdRouter($id)) {
             try {
                 $marcaEliminada = $this->modelo->borrarMarca($id);
                 if ($marcaEliminada > 0) {
@@ -119,14 +120,12 @@ class marcaControlador{
         try {//verifico permisos, parametros validos y posible acceso sin datos al form de alta.
             if ($_POST && Validacion::verificacionFormulario($_POST)) {
 
-                $id_marca =htmlspecialchars($_POST['id_marca']);
                 $origen =htmlspecialchars($_POST['origen']);
                 $caracteristica =htmlspecialchars($_POST['caracteristica']);
                 $nombreMarca =htmlspecialchars($_POST['nombreMarca']);
                 $imgMarca =htmlspecialchars($_POST['imgMarca']);
-
                
-                $id = $this->modelo->insertarMarca($id_marca,$origen, $caracteristica, $nombreMarca, $imgMarca);
+                $id = $this->modelo->insertarMarca($origen, $caracteristica, $nombreMarca, $imgMarca);
                 
                 if ($id) {
                     header('Location: ' . BASE_URL . "marca");

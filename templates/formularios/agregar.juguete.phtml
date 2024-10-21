@@ -3,6 +3,13 @@
 <div class="container mt-1">
     <h5>Carga de Producto</h5>
     <form action="agregarJuguete" method="POST">
+
+            <select class="form-select" id="marca" name="id_marca">
+            <?php foreach($marca as $marc): ?>
+                <option value="<?= $marc->id_marca; ?>"><?= $marc->nombreMarca; ?></option>
+            <?php endforeach; ?>
+             </select>
+
         <div class="mb-1">
             <label for="nombreProducto" class="form-label"> nombre producto</label>
             <input type="text" class="form-control" id="nombreProducto" name="nombreProducto" required>

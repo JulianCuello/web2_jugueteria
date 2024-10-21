@@ -88,7 +88,7 @@
             $codigo = htmlspecialchars($_POST['codigo']);
             $img = htmlspecialchars($_POST['img']);
             
-            $registroModificado = $this->modelo->modificarJuguete($id_juguete, $nombreProducto, $precio, $material, $codigo, $img);
+            $registroModificado = $this->modelo->actualizarJuguete($id_juguete, $nombreProducto, $precio, $material, $codigo, $img);
 
             if ($registroModificado > 0) {
                 header('Location: ' . BASE_URL . "lista");
@@ -105,7 +105,7 @@
 
 public function mostrarFormularioAlta(){
     Autorizacion::verificacion();
-    $marca = $this->modeloMarca->obtenerIdMarca(); //consulta las marcas disponibles
+    $marca = $this->modeloMarca->obtenerMarcas(); //consulta las marcas disponibles
     $this->vista->mostrarFormulario($marca);
 }
 
