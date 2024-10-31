@@ -27,8 +27,13 @@
                 $query->execute([$nombreProducto, $precio, $material, $id_marca, $codigo, $img]); // Corrección aquí
                 return $this->db->lastInsertId();
             }
-            
-            
+
+            public function obtenerMarcaId($id) {
+                $query = $this->db->prepare('SELECT * FROM `marca` WHERE id_marca=?');
+                $query->execute([$id]);
+                return $query->fetch(PDO::FETCH_OBJ); 
+            }
+        
         public function borrarJuguete($id) {
             $query = $this->db->prepare('DELETE FROM juguete WHERE id_juguete = ?');
             $query->execute([$id]);

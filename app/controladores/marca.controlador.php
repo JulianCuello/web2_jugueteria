@@ -30,11 +30,11 @@ class marcaControlador{
         }
     }
     //lista filtrada
-    public function mostrarMarcaPorId($id){
-        if (Validacion::verificacionIdRouter($id)) { //validacion datos recibidos del router
-            $marca = $this->modeloLista->obtenerMarcaId($id);//selecciona los items relacionados y la categoria asociada segun parametro
+    public function mostrarMarcaId($id) {
+        if (Validacion::verificacionIdRouter($id)) {
+            $marca = $this->modeloJuguete->obtenerMarcaId($id);
             if ($marca != null) {
-                $this->vista->mostrarJugueteMarcaPorId($marca);
+                $this->vista->mostrarMarcaId($marca); // Verifica que este método exista
             } else {
                 $this->alertaVista->mostrarVacio("la categoria seleccionada no contiene items asociados");
             }
@@ -42,7 +42,6 @@ class marcaControlador{
             $this->alertaVista->mostrarError("404-Not-Found");
         }
     }
-
     //eliminar juguete
     public function eliminarMarca($id)
     {
@@ -67,12 +66,12 @@ class marcaControlador{
     }
 
     //mostrar formulario modificacion
-    public function mostrarModificacionFormMarca($id){
+    public function mostrarFormularioMarcaModificacion($id){
         Autorizacion::verificacion(); //verifico permisos y parametros validos
         if (Validacion::verificacionIdRouter($id)) {
             $marca = $this->modelo->obtenerMarcaId($id);//consulto los datos actuales
             if($marca!=null){
-            $this->vista->mostrarModificacionFormMarca($marca);
+            $this->vista->mostrarFormularioMarcaModificacion($marca);
             }
             else{
                 $this->alertaVista->mostrarError("error al intentar mostrar formulario");
@@ -83,7 +82,7 @@ class marcaControlador{
     }
 
     //enviar datos de modificacion 
-    public function mostrarModificacionMarca(){
+    public function mostrarMarcaModificada(){
         Autorizacion::verificacion();
         try {//verifico permisos, parametros validos y posible acceso sin previo acceso al form modificacion.
             if ($_POST && Validacion::verificacionFormulario($_POST)) {

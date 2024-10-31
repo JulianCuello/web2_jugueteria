@@ -6,11 +6,11 @@ class marcaVista{
         require './templates/mostrar/marca.phtml';
     }
 
-    public function mostrarJuguetesMarcaPorId($marca){
-        require './templates/mostrar/obtenerMarcaPorId.phtml';
+    public function mostrarMarcaId($marca){
+        require './templates/mostrar/marcaPorId.phtml';
     }
     
-    public function mostrarModificacionDeFormulario($marca){
+    public function mostrarFormularioMarcaModificacion($marca){
         require './templates/formularios/modificar.marca.phtml';
     }
     

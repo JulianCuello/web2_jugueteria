@@ -62,7 +62,7 @@ switch ($params[0]) {
         break;
     case 'modificarFormularioJuguete':
         if(isset($params[1]))
-        $jugueteControlador->mostrarFormularioModificacion($params[1]);
+        $jugueteControlador->mostrarModificacion($params[1]);
         else $mostrarControlador->mostrarError("404-Not-Found");
         break;
     case 'modificarJuguete':
@@ -79,7 +79,7 @@ switch ($params[0]) {
         break;
     case 'marcaId':
         if(isset($params[1]))
-        $marcaControlador->mostrarMarcaPorId($params[1]);
+        $marcaControlador->mostrarMarcaId($params[1]);
         else $marcaControlador->mostrarMarcas();
         break;
     case 'eliminarMarca':

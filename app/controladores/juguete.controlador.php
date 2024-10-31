@@ -60,7 +60,7 @@
             }
         } 
 
-        public function mostrarFormularioModificacion($id){
+        public function mostrarFormularioModificado($id){
             Autorizacion::verificacion();//verifico permisos y parametros validos
             if (Validacion::verificacionIdRouter($id)) {
                 $item = $this->modelo->obtenerJuguetePorId($id);//consulto los tados actuales

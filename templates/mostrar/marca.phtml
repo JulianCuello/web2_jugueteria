@@ -15,10 +15,10 @@ require './templates/tareas/header.phtml';
                             <strong>caracteristica:</strong> <?= htmlspecialchars($marca->caracteristica); ?><br>
                             <strong>Nombre de Marca:</strong> <?= htmlspecialchars($marca->nombreMarca); ?>
                         </p>
-                        <a href="marca_id/<?= $marca->id_marca; ?>" class="btn btn-primary">Ver Productos</a>
+                        <a href="marcaId/<?= $marca->id_marca; ?>" class="btn btn-primary">Ver Productos</a>
                         <?php if (Autorizacion::esAdministrador()) { ?>
                             <a href="eliminarMarca/<?= $marca->id_marca; ?>" class="btn btn-danger">Eliminar</a>
-                            <a href="modificarMarcaFormulario/<?= $marca->id_marca; ?>" class="btn btn-success">Modificar</a>
+                            <a href="modificarMarca/<?= $marca->id_marca; ?>" class="btn btn-success">Modificar</a>
                         <?php } ?>
                     </div>
                 </div>
