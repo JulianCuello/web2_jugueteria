@@ -16,11 +16,12 @@
                 return $query->fetchAll(PDO::FETCH_OBJ);
             }
        
-         public function obtenerJuguetePorId($id) {
-            $query = $this->db->prepare('SELECT * FROM juguete JOIN marca ON juguete.id_marca = marca.id_marca WHERE juguete.id_juguete = ?');
-            $query->execute([$id]);
-                return $query->fetchAll(PDO::FETCH_OBJ);
+            public function obtenerJuguetePorId($id) {
+                $query = $this->db->prepare('SELECT * FROM juguete JOIN marca ON juguete.id_marca = marca.id_marca WHERE juguete.id_juguete = ?');
+                $query->execute([$id]);
+                return $query->fetchAll(PDO::FETCH_OBJ);  // Devuelve solo un objeto
             }
+            
 
             function insertarJuguete($nombreProducto, $precio, $material, $id_marca, $codigo, $img) {
                 $query = $this->db->prepare('INSERT INTO juguete (nombreProducto, precio, material, id_marca, codigo, img) VALUES (?, ?, ?, ?, ?, ?)');
