@@ -89,14 +89,14 @@ switch ($params[0]) {
         break;
     case 'modificarMarcaFormulario':
         if(isset($params[1]))
-        $marcaControlador->mostrarFormularioMarcaModificacion($params[1]);
+        $marcaControlador->formularioMarcaModificacion($params[1]);
         else $marcaControlador->mostrarError("404-Not-Found");
         break;
     case 'modificarMarca':
-        $marcaControlador->mostrarMarcaModificacion();
+        $marcaControlador->mostrarMarcaModificada();
         break;
     case 'agregarMarcaFormulario':
-        $marcaControlador->mostrarFormularioMarca();
+        $marcaControlador->formularioMarcaModificacion();
         break;
     case 'agregarMarca':
         $marcaControlador->agregarMarca();

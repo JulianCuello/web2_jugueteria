@@ -18,7 +18,7 @@ require './templates/tareas/header.phtml';
                         <a href="marcaId/<?= $marca->id_marca; ?>" class="btn btn-primary">Ver Productos</a>
                         <?php if (Autorizacion::esAdministrador()) { ?>
                             <a href="eliminarMarca/<?= $marca->id_marca; ?>" class="btn btn-danger">Eliminar</a>
-                            <a href="modificarMarca/<?= $marca->id_marca; ?>" class="btn btn-success">Modificar</a>
+                            <a href="formularioMarcaModificacion/<?= $marca->id_marca; ?>" class="btn btn-success">Modificar</a>
                         <?php } ?>
                     </div>
                 </div>

@@ -66,23 +66,20 @@ class marcaControlador{
     }
 
     //mostrar formulario modificacion
-    public function mostrarFormularioMarcaModificacion($id){
+    public function formularioMarcaModificacion($id){
         Autorizacion::verificacion(); //verifico permisos y parametros validos
         if (Validacion::verificacionIdRouter($id)) {
             $marca = $this->modelo->obtenerMarcaId($id);//consulto los datos actuales
-            if($marca!=null){
-            $this->vista->mostrarFormularioMarcaModificacion($marca);
-            }
-            else{
+            if($marca == null){
                 $this->alertaVista->mostrarError("error al intentar mostrar formulario");
-            }
-        }else{
-            $this->alertaVista->mostrarError("404-Not-Found");
+             }
+                $this->vista->mostrarFormularioMarcaModificacion($marca);
         }
     }
+ }
 
     //enviar datos de modificacion 
-    public function mostrarMarcaModificada(){
+    function mostrarMarcaModificada(){
         Autorizacion::verificacion();
         try {//verifico permisos, parametros validos y posible acceso sin previo acceso al form modificacion.
             if ($_POST && Validacion::verificacionFormulario($_POST)) {
@@ -93,28 +90,20 @@ class marcaControlador{
                 $imgMarca =htmlspecialchars($_POST['imgMarca']);
 
                 
-                $marcaModificada = $this->modelo->modificacionJuguete($id_marca, $origen, $caracteristica);
+                $marcaModificada = $this->modelo->modificacionJuguete($id_marca, $origen, $caracteristica, $nombreMarcam, $imgMarca);
                 if ($marcaModificada > 0) {
                     header('Location: ' . BASE_URL . "marca");
                 } else {
                     $this->alertaVista->mostrarError("No se pudo actualizar marca");
                 }
-            } else {
-                $this->alertaVista->mostrarError("Error-El formulario no pudo ser procesado, asegurate de que hayas completado todos los campos");
-            }
+            } 
         } catch (PDOException $error) {
             $this->alertaVista->mostrarError("Error en la consulta a la base de datos/$error");
         }
     }
 
 
-    //mostrar formulario altaCategoria
-    public function mostrarFormularioMarca(){
-        Autorizacion::verificacion();
-        $this->vista->mostrarFormularioMarca();
-    }
-
-    public function agregarMarca(){
+   function agregarMarca(){
         Autorizacion::verificacion();
         try {//verifico permisos, parametros validos y posible acceso sin datos al form de alta.
             if ($_POST && Validacion::verificacionFormulario($_POST)) {
@@ -139,4 +128,3 @@ class marcaControlador{
             $this->alertaVista->mostrarError("Error en la consulta a la base de datos/$error");
         }
     }
-}
