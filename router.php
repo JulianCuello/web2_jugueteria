@@ -87,16 +87,11 @@ switch ($params[0]) {
         $marcaControlador->eliminarMarca($params[1]);
         else $mostrarControlador->mostrarError("404-Not-Found");
         break;
-    case 'modificarMarcaFormulario':
-        if(isset($params[1]))
-        $marcaControlador->formularioMarcaModificacion($params[1]);
-        else $marcaControlador->mostrarError("404-Not-Found");
-        break;
+        case 'agregarMarcaFormulario':
+            $marcaControlador->formularioMarca();
+            break;
     case 'modificarMarca':
         $marcaControlador->mostrarMarcaModificada();
-        break;
-    case 'agregarMarcaFormulario':
-        $marcaControlador->formularioMarcaModificacion();
         break;
     case 'agregarMarca':
         $marcaControlador->agregarMarca();

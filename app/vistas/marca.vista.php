@@ -14,7 +14,7 @@ class marcaVista{
         require './templates/formularios/modificar.marca.phtml';
     }
     
-    public function mostrarFormularioMarca(){
+    public function mostrarFormularioMarca($marca = null) {
         require './templates/formularios/agregar.marca.phtml';
     }
-}
+ }

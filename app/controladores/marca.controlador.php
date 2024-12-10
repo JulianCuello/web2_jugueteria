@@ -42,6 +42,7 @@ class marcaControlador{
             $this->alertaVista->mostrarError("404-Not-Found");
         }
     }
+    
     //eliminar juguete
     public function eliminarMarca($id)
     {
@@ -66,17 +67,23 @@ class marcaControlador{
     }
 
     //mostrar formulario modificacion
-    public function formularioMarcaModificacion($id){
-        Autorizacion::verificacion(); //verifico permisos y parametros validos
-        if (Validacion::verificacionIdRouter($id)) {
-            $marca = $this->modelo->obtenerMarcaId($id);//consulto los datos actuales
-            if($marca == null){
-                $this->alertaVista->mostrarError("error al intentar mostrar formulario");
-             }
-                $this->vista->mostrarFormularioMarcaModificacion($marca);
+    public function formularioMarca($id = null) {
+        Autorizacion::verificacion(); //verifico permisos y parametros válidos
+    
+        // Si el $id es proporcionado, busco la marca para editarla, si no, creo un nuevo formulario
+        if ($id !== null && Validacion::verificacionIdRouter($id)) {
+            $marca = $this->modelo->obtenerMarcaId($id); //consulto los datos actuales
+            if ($marca == null) {
+                $this->alertaVista->mostrarError("Error al intentar mostrar formulario");
+                return;
+            }
+        } else {
+            // Si no se pasa ID, se muestra el formulario para agregar una nueva marca
+            $marca = null;
         }
+    
+        $this->vista->mostrarFormularioMarca($marca);
     }
- }
 
     //enviar datos de modificacion 
     function mostrarMarcaModificada(){
@@ -128,3 +135,5 @@ class marcaControlador{
             $this->alertaVista->mostrarError("Error en la consulta a la base de datos/$error");
         }
     }
+ }
+
