@@ -49,6 +49,7 @@
                     $registroEliminado = $this->modelo->borrarJuguete($id);
                     if ($registroEliminado > 0) {
                         header('Location: ' . BASE_URL . "lista");
+                        exit();
                     } else {
                         $this->alertaVista->mostrarError("error al intentar eliminar");
                     }
@@ -76,30 +77,25 @@
         }
 
  //enviar datos de modificacion
- public function mostrarModificacion(){
+ public function modificarJuguete(){
     Autorizacion::verificacion();
-    try {//verifico permisos, parametros validos y posible acceso sin previo acceso al form modificacion.
         if ($_POST && Validacion::verificarFormulario($_POST)) {
 
-            $id_marca = htmlspecialchars($_POST['id_juguete']);
+            $id_juguete = htmlspecialchars($_POST['id_juguete']);
             $nombreProducto = htmlspecialchars($_POST['nombreProducto']);
             $precio = htmlspecialchars($_POST['precio']);
             $material = htmlspecialchars($_POST['material']);
+            $id_marca = htmlspecialchars($_POST['id_marca']);
             $codigo = htmlspecialchars($_POST['codigo']);
             $img = htmlspecialchars($_POST['img']);
             
-            $registroModificado = $this->modelo->actualizarJuguete($id_juguete, $nombreProducto, $precio, $material, $codigo, $img);
+            $registroModificado = $this->modelo->actualizarJuguete($id_juguete, $nombreProducto, $precio, $material,$id_marca, $codigo, $img);
 
-            if ($registroModificado > 0) {
-                header('Location: ' . BASE_URL . "lista");
-            } else {
+            if ($registroModificado < 1) {
                 $this->alertaVista->mostrarError("No se pudo actualizar registro");
+            } else {
+                header('Location: ' . BASE_URL . "lista");
             }
-        } else {
-            $this->aleratVista->mostrarError("error-el formulario no pudo ser procesado, asegurate de que hayas completado todos los campos");
-        }
-        } catch (PDOException $error) {
-        $this->aleratVista->mostrarError("error en la consulta a la base de datos/$error");
     }
 }
 
@@ -136,5 +132,5 @@ public function agregarJuguete() {
     } catch (PDOException $error) {
         $this->alertaVista->mostrarError("Error en la consulta a la base de datos: " . $error->getMessage());
     }
+    }
 }
- }

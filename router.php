@@ -65,9 +65,11 @@ switch ($params[0]) {
         $jugueteControlador->mostrarModificacion($params[1]);
         else $mostrarControlador->mostrarError("404-Not-Found");
         break;
-    case 'modificarJuguete':
-        $jugueteControlador->mostrarModificacion();
-        break;
+        case 'modificarJuguete':
+            if(isset($params[1]))
+            $jugueteControlador->modificarJuguete($params[1]);
+            else $mostrarControlador->mostrarError("esta entrando con error");
+            break;
     case 'agregarJugueteFormulario':
         $jugueteControlador->mostrarFormularioAlta();
         break;
