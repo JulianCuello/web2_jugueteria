@@ -1,0 +1,38 @@
+
+<?php
+require './templates/task/header.phtml';   
+?>
+    <div class="mt-1 w-100 mx-auto" style="height: 300px; ">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="text-center">actor</th>
+                    <th class="text-center">Material</th>
+                    <th class="text-center">origen</th>
+                    <th class="text-center">Motor</th>
+                    <th class="text-center">Imagen actor</th>
+                    <th class="text-center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach($actores as $actor) { ?>      
+                    <tr>
+                        <td class="text-center"><?= $actor->actor; ?></td>
+                        <td class="text-center"><?= $actor->material; ?></td>
+                        <td class="text-center"><?= $actor->origen; ?></td>
+                        <td class="text-center"><?= $actor->motor; ?></td>
+                        <td class="text-center"><img src="<?= $actor->imagenactor; ?>"class="imagen" style="max-width: 80px"></td>
+                        <td class="text-center">
+                            <a href="actorId/<?= $actor->id_actor;?>" class="btn btn-primary">Ver Productos</a>
+                            <?php if (AuthHelper::isAdmin()) { ?>
+                            <a href="remover_actor/<?= $actor->id_actor; ?>" type="button" class='btn btn-danger ml-auto'>Eliminar</a>
+                            <a href="modificar_actor_formulario/<?= $actor->id_actor; ?>" type="button" class='btn btn-success ml-auto'>Modificar</a>
+                            <?php } ?>
+                        </td>
+                        </tr>      
+                <?php } ?>
+            </tbody>
+        </table>
+    </div>
+        <?php
+         require_once 'templates/task/footer.phtml';

@@ -1,16 +1,15 @@
-.juguetes {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 25px;
+#cont{
+    background-color:white;
+    height: 900px;;
+
 }
 
-.card-img-top {
-    max-height: 200px;
-    object-fit: cover;
+.text-center {
+    text-align: center;
 }
 
-.juguete-image {
-    max-height: 500px;
-    width: 100%;
-    object-fit: cover;
+td{
+    font-style: italic;
 }
+
+

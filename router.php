@@ -1,115 +1,115 @@
 <?php
 require_once './config.php';
-require_once './app/controladores/juguete.controlador.php';
-require_once './app/controladores/marca.controlador.php';
-require_once './app/controladores/autorizacion.controlador.php';
-require_once './app/controladores/mostrar.controlador.php';
-
-define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
-
-//                                              TABLA DE RUTEO
-/*
-  tabla ruteo                controller                                          descripc                                    
-| lista                  -> |ListaControlador |mostrarJuguetes()       |lista productos (juguetes)            |
-| listaId/:id            -> |ListaControlador |mostrarListaPorId(id)   |lista producto por id                 |
-| eliminarJuguete/:id    -> |ListaControlador    |eliminarJugete(id)          |elimina registro de juguete    |
-| modificarJugeteFormulario/:id-> |ListaControlador   |mostrarFormularioModificacion(id)      |redirige a formulario de modificacion |
-| modificarJuguete          -> |ListaControlador   |mostrarModificacion()    |envia formulario con modificacion     |
-| agregarJugueteFormulario  -> |ListaControlador    |mostrarFormularioAlta() |redirige a formulario alta producto   |
-| agregarJuguete()                -> |ListaControlador    |agregarJuguete()  |envia formulario y crea nuevo producto|
-|---------------------------|------------------|------------------------|--------------------------------------|
-| marca                     -> |marcacontrolador|mostrarMarcas()            |lista marcas                      |
-| marcaId/:id               -> |marcacontrolador|mostrarMarcaPorId()          |lista marca por id                |
-| elminarMarca/:id     -> |marcacontrolador|elminiarMarca()                 |elimina registro de marca         |
-| modificarMarcaFormulario/:id -> |marcacontrolador|FormularioMarcaModificacion()|redirige a formulario de modificacion |
-| modificarMarca         -> |marcacontrolador|mostrarMarcaModificacion()    |envia formulario con modificacion     |
-| agregarMarcaFormulario  -> |marcacontrolador|mostrarFormularioMarca()   |redirige a formulario alta marca  |
-| agregarMarca            -> |marcacontrolador|agregarMarca()                |envia formulario ,crea nueva marca|
-|---------------------------|------------------|------------------------|--------------------------------------|
-| inicioSesion                  -> |AutorizacionControlador    |inicioSesion()             |                                      |
-| cerrarSesion                 -> |AutorizacionControlador    |cerrarSesion()            |                                      |
-*/
+require_once './app/controllers/pelicula.controller.php';
+require_once './app/controllers/actor.controller.php';
+require_once './app/controllers/auth.controller.php';
+require_once './app/controllers/show.controller.php';
 
 
-if (!empty($_GET["action"])){
-    $action = $_GET["action"];
-} else {
-    $action = "lista";
+define('BASE_URL', '//' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']) . '/');
+
+$action = 'lista'; // accion por defecto
+
+if (!empty($_GET['action'])) {
+    $action = $_GET['action'];
 }
 
-$params = explode("/",$action);
+/*
+  tabla ruteo                controller                                          descripc                                    
+| lista                   -> |peliculacontroller    |mostrar_pelicula()              |listaa productos                       |
+| listaId/:id             -> |peliculacontroller    |mostrar_pelicula_por_id(id)        |listaa producto por id                 |
+| eliminar_pelicula/:id         -> |peliculacontroller    |eliminar_pelicula(id)          |elimina registro de item              |
+| modificar_pelicula_formulario/:id     -> |peliculacontroller    |mostrar_formulario_modificacion(id)      |redirige a formulario de modificacion |
+| modificar_pelicula             -> |peliculacontroller    |mostrar_modificacion()            |envia formulario con modificacion     |
+| agregar_pelicula_formulario            -> |peliculacontroller    |mostrar_formulario_alta()          |redirige a formulario alta producto   |
+| agregar_pelicula                -> |peliculacontroller    |agregar_pelicula()               |envia formulario y crea nuevo producto|
+|---------------------------|------------------|------------------------|--------------------------------------|
+| actor               -> |actorcontroller|mostrar_actor()          |listaa actores                      |
+| actorId/:id         -> |actorcontroller|mostrar_actor_por_id())     |listaa actor por id                |
+| remover_actor/:id     -> |actorcontroller|remover_actor()        |elimina registro de actor         |
+| modificar_actor_formulario/:id -> |actorcontroller|mostrar_formulario_actor_modificacion()|redirige a formulario de modificacion |
+| modificar_actor         -> |actorcontroller|mostrar_actor_modificacion()    |envia formulario con modificacion     |
+| agregar_actor_formulario        -> |actorcontroller|mostrar_formulario_actor()      |redirige a formulario alta actor  |
+| agregar_actor            -> |actorcontroller|agregar_actor()           |envia formulario ,crea nueva actor|
+|---------------------------|------------------|------------------------|--------------------------------------|
+| login                  -> |Authcontroller    |showLogin()             |                                      |
+| logout                 -> |Authcontroller    |showLogout()            |                                      |
+*/
+
+$params = explode('/', $action);
 
 //instancio una sola vez
-$jugueteControlador = new JugueteControlador();
-$marcaControlador = new MarcaControlador();
-$autorizacionControlador = new AutorizacionControlador();
-$mostrarControlador = new MostrarControlador();
+$peliculacontroller = new peliculacontroller();
+$actorcontroller = new actorcontroller();
+$authcontroller = new Authcontroller();
+$mostrar_controller = new mostrar_controller();
 
 switch ($params[0]) {
 
     case 'lista':
-        $jugueteControlador->mostrarJuguetes();
+        $peliculacontroller->mostrar_pelicula();
         break;
-    case 'jugueteId':
+    case 'listaId':
         if(isset($params[1]))
-        $jugueteControlador->mostrarJuguetePorId($params[1]);
-        else $listaControlador->mostrarJuguetes();
+        $peliculacontroller->mostrar_pelicula_por_id($params[1]);
+        else $peliculacontroller->mostrar_pelicula();
         break;
-    case 'eliminarJuguete':
+    case 'eliminar_pelicula':
         if(isset($params[1]))
-        $jugueteControlador->eliminarJuguete($params[1]);
-        else $mostrarControlador->mostrarError("404-Not-Found");
+        $peliculacontroller->eliminar_pelicula($params[1]);
+        else $mostrar_controller->mostrar_error("404-Not-Found");
         break;
-    case 'modificarFormularioJuguete':
+    case 'modificar_pelicula_formulario':
         if(isset($params[1]))
-        $jugueteControlador->mostrarModificacion($params[1]);
-        else $mostrarControlador->mostrarError("404-Not-Found");
+        $peliculacontroller->mostrar_formulario_modificacion($params[1]);
+        else $mostrar_controller->mostrar_error("404-Not-Found");
         break;
-        case 'modificarJuguete':
-            if(isset($params[1]))
-            $jugueteControlador->modificarJuguete($params[1]);
-            else $mostrarControlador->mostrarError("esta entrando con error");
-            break;
-    case 'agregarJugueteFormulario':
-        $jugueteControlador->mostrarFormularioAlta();
+    case 'modificar_pelicula':
+        $peliculacontroller->mostrar_modificacion();
         break;
-    case 'agregarJuguete':
-        $jugueteControlador->agregarJuguete();
+    case 'agregar_pelicula_formulario':
+        $peliculacontroller->mostrar_formulario_alta();
         break;
-    case 'marca':
-        $marcaControlador->mostrarMarcas();
+    case 'agregar_pelicula':
+        $peliculacontroller->agregar_pelicula();
         break;
-    case 'marcaId':
+    case 'actor':
+        $actorcontroller->mostrar_actor();
+        break;
+    case 'actorId':
         if(isset($params[1]))
-        $marcaControlador->mostrarMarcaId($params[1]);
-        else $marcaControlador->mostrarMarcas();
+        $actorcontroller->mostrar_actor_por_id($params[1]);
+        else $actorcontroller->mostrar_actor();
         break;
-    case 'eliminarMarca':
+    case 'remover_actor':
         if(isset($params[1]))
-        $marcaControlador->eliminarMarca($params[1]);
-        else $mostrarControlador->mostrarError("404-Not-Found");
+        $actorcontroller->remover_actor($params[1]);
+        else $mostrar_controller->mostrar_error("404-Not-Found");
         break;
-        case 'agregarMarcaFormulario':
-            $marcaControlador->formularioMarca();
-            break;
-    case 'modificarMarca':
-        $marcaControlador->mostrarMarcaModificada();
+    case 'modificar_actor_formulario':
+        if(isset($params[1]))
+        $actorcontroller->mostrar_formulario_actor_modificacion($params[1]);
+        else $mostrar_controller->mostrar_error("404-Not-Found");
         break;
-    case 'agregarMarca':
-        $marcaControlador->agregarMarca();
+    case 'modificar_actor':
+        $actorcontroller->mostrar_actor_modificacion();
         break;
-    case 'inicioSesion':
-        $autorizacionControlador->mostrarInicioSesion();
+    case 'agregar_actor_formulario':
+        $actorcontroller->mostrar_formulario_actor();
         break;
-    case 'cierreSesion':
-        $autorizacionControlador->cerrarSesion();
+    case 'agregar_actor':
+        $actorcontroller->agregar_actor();
         break;
-    case 'autorizacion':
-        $autorizacionControlador->autorizacion();
+    case 'login':
+        $authcontroller->showLogin();
+        break;
+    case 'logout':
+        $authcontroller->logout();
+        break;
+    case 'auth':
+        $authcontroller->auth();
         break;
     default:
-        $mostrarControlador->demostrarError("404-Not-Found");
+        $mostrar_controller->mostrar_error("404-Not-Found");
         break;
 }
-    
-
