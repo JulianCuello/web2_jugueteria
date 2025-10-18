@@ -14,13 +14,13 @@ class actormodel extends model{
     public function obtener_actor_id($id){
         $query = $this->db->prepare('SELECT * FROM `actor` WHERE id_actor=?');
         $query->execute([$id]);
-        return $query->fetchAll(PDO::FETCH_OBJ);       
+        return $query->fetch(PDO::FETCH_OBJ);       
     }
     
     //inserta nueva actor
-    public function insertar_actor($actor, $material, $origen, $motor, $imagenactor){
-        $query = $this->db->prepare('INSERT INTO actor (actor, material, origen, motor, imagenactor) VALUES(?,?,?,?,?)');
-        $query->execute([$actor, $material, $origen, $motor, $imagenactor]);
+    public function insertar_actor($nombre_actor , $fecha_nacimiento, $edad, $nacionalidad){
+        $query = $this->db->prepare('INSERT INTO actor ($nombre_actor , $fecha_nacimiento, $edad, $nacionalidad) VALUES(?,?,?,?)');
+        $query->execute([$nombre_actor , $fecha_nacimiento, $edad, $nacionalidad]);
         return $this->db->lastInsertId();
     }
 
@@ -32,9 +32,9 @@ class actormodel extends model{
     }
 
     //modifica actor
-    public function modificar_pelicula($id_actor, $material, $origen, $motor, $imagenactor){
-        $query = $this->db->prepare('UPDATE actor SET material=?,origen=?,motor=?,imagenactor=? WHERE id_actor=?');
-        $query->execute([$material, $origen, $motor, $imagenactor, $id_actor]);
+    public function modificar_pelicula($nombre_actor , $fecha_nacimiento, $edad, $nacionalidad){
+        $query = $this->db->prepare('UPDATE actor SET nombre_actor=?,fecha_nacimiento=?,edad=?,nacionalidad=? WHERE id_actor=?');
+        $query->execute([$nombre_actor , $fecha_nacimiento, $edad, $nacionalidad]);
         return $query->rowCount();
     }
 

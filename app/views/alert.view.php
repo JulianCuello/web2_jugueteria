@@ -6,7 +6,7 @@ class Alertview{
         require './templates/alerts/error.phtml';
     }
 
-    public function renderEmpty($text){
+    public function render_empty($text){
         require './templates/alerts/empty.phtml';
     }
 }

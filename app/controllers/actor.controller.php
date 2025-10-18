@@ -29,7 +29,7 @@ class actorcontroller
         if ($actores != null) {
             $this->view->mostrar_actor($actores, AuthHelper::isAdmin());
         } else {
-            $this->alertview->renderEmpty("no hay elementos para mostrar");
+            $this->alertview->render_empty("no hay elementos para mostrar");
         }
     }
 
@@ -41,7 +41,7 @@ class actorcontroller
             if ($actor != null) {
                 $this->view->mostrar_peliculas_actor_por_id($actor);
             } else {
-                $this->alertview->renderEmpty("la actor seleccionada no contiene items asociados");
+                $this->alertview->render_empty("la actor seleccionada no contiene items asociados");
             }
         } else {
             $this->alertview->render_error("404-Not-Found");

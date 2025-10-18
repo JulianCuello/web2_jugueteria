@@ -5,8 +5,7 @@ require_once './app/views/pelicula.view.php';
 require_once './app/views/alert.view.php';
 require_once './helpers/validation.helper.php';
 
-
-//controler de Productos
+//controler de peliculas
 class Peliculacontroller{
 
     private $model;
@@ -28,7 +27,7 @@ class Peliculacontroller{
         if ($lista != null) {
             $this->view->mostrar_lista($lista, AuthHelper::isAdmin());
         } else {
-            $this->alertview->renderEmpty("la listaa se encuetra vacia");
+            $this->alertview->render_empty("la listaa se encuetra vacia");
         }
     }
 
@@ -39,7 +38,7 @@ class Peliculacontroller{
             if ($item != null) {
                 $this->view->mostrar_peliculas_lista_por_id($item);
             } else {
-                $this->alertview->renderEmpty("no hay elementos para mostrar");
+                $this->alertview->render_empty("no hay elementos para mostrar");
             }
         } else {
             $this->alertview->render_error("404-Not-Found");

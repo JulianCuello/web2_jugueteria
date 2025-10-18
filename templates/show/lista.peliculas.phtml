@@ -27,7 +27,7 @@ require './templates/task/header.phtml';
                     <td class="text-center"><?= $item->publico; ?></td>
                     <td class="text-center"><img src="<?= $item->img; ?>" class="img" style="max-width: 80px"></td>
                     <td class="text-center">
-                        <a href="listaId/<?= $item->id_pelicula;?>" class="btn btn-primary">Ver Producto</a>
+                        <a href="listaId/<?= $item->id_pelicula;?>" class="btn btn-primary">Ver Pelicula</a>
                         <?php if ($adm) { ?>
                             <a href="eliminar_pelicula/<?= $item->id_pelicula; ?>" type="button" class='btn btn-danger ml-auto'>Eliminar</a>
                             <a href="modificar_pelicula_formulario/<?= $item->id_pelicula; ?>" type="button" class='btn btn-success ml-auto'>Modificar</a>
